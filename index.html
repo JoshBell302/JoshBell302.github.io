@@ -1,16 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Page Title</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Styles/styles.css">
+    <title>Spinning Wheel</title>
 </head>
 
 <body>
-    <h2>Bodu Header</h2>
-    <p>
-        A bunch of random text...
-        thereas some more.
-    </p>
+    <canvas id="myCanvas" width="1000" height="1000" style="border: 3px solid;"></canvas>
+    <script src="wheel.js"></script>
+    <script>
+        // Create context for the wheel
+        const context = myCanvas.getContext("2d")
+        const center = {x: myCanvas.width / 2, y: myCanvas.height / 2}
+        const radius = myCanvas.width * 0.4
+        const colors = ["red", "lime", "blue"]
+
+        // Create and draw the Wheel class
+        const wheel = new Wheel(center, radius, colors)
+
+        // Create the animation for the spinning the wheel
+        let speed = 5000;
+        animate();
+
+        function animate() {
+            // Calculate rotation speed
+            angle = 0.1 * speed;
+            if (speed > 0.1){
+                speed*=0.98
+            }
+            else {
+                cancelAnimationFrame(animationId)
+                return;
+            }
+            wheel.draw(context, angle)
+            animationId = requestAnimationFrame(animate)
+        }
+
+    </script>
+
+</div>
 </body>
 
 </html>
