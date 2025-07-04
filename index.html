@@ -9,32 +9,55 @@
 
 <body>
     <canvas id="myCanvas" width="1000" height="1000" style="border: 3px solid;"></canvas>
+    <!--
+    <img id="mario" src="Characters/mario_icon.png" hidden>
+    <img id="luigi" src="Characters/luigi_icon.png" hidden>
+    <img id="peach" src="Characters/peach_icon.png" hidden>
+    -->
     <script src="wheel.js"></script>
     <script>
         // Create context for the wheel
         const context = myCanvas.getContext("2d")
         const center = {x: myCanvas.width / 2, y: myCanvas.height / 2}
         const radius = myCanvas.width * 0.4
-        const colors = ["red", "lime", "blue"]
+        const colors = ["red", "lime", "blue", "orange", "violet", "yellow", "purple", "green"]
+        
+        // const mario = document.getElementById("mario")
+        // const luigi = document.getElementById("luigi")
+        // const peach = document.getElementById("peach")
+        // const icons = [mario, luigi, peach]
+        // context.drawImage(mario, 30, 100)
+        // context.drawImage(luigi, 100, 100)
+        // context.drawImage(peach, 100, 100)
 
-        // Create and draw the Wheel class
+        // Create the Wheel class
         const wheel = new Wheel(center, radius, colors)
 
-        // Create the animation for the spinning the wheel
-        let speed = 5000;
+        // Create background wheel
+        context.beginPath();
+        context.arc(center.x, center.y, radius+10, 0, 2 * Math.PI)
+        context.fillStyle = "white"
+        context.fill();
+
+        // Create the animation variables for the spinning the wheel
+        let angle_speed = 1000;
+        let random_angle = Math.floor(Math.random() * 10000);
         animate();
 
         function animate() {
             // Calculate rotation speed
-            angle = 0.1 * speed;
-            if (speed > 0.1){
-                speed*=0.98
+            angle = (0.1 * angle_speed) + (random_angle);
+            if (angle_speed > 1){
+                angle_speed*=0.99
             }
             else {
+                const pixelResultData = context.getImageData(500, 131, 1, 1)
+                alert(pixelResultData.data)
                 cancelAnimationFrame(animationId)
                 return;
             }
             wheel.draw(context, angle)
+            wheel.draw_arrow()
             animationId = requestAnimationFrame(animate)
         }
 
