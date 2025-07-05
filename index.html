@@ -9,11 +9,6 @@
 
 <body>
     <canvas id="myCanvas" width="1000" height="1000" style="border: 3px solid;"></canvas>
-    <!--
-    <img id="mario" src="Characters/mario_icon.png" hidden>
-    <img id="luigi" src="Characters/luigi_icon.png" hidden>
-    <img id="peach" src="Characters/peach_icon.png" hidden>
-    -->
     <script src="wheel.js"></script>
     <script>
         // Create context for the wheel
@@ -21,14 +16,6 @@
         const center = {x: myCanvas.width / 2, y: myCanvas.height / 2}
         const radius = myCanvas.width * 0.4
         const colors = ["red", "lime", "blue", "orange", "violet", "yellow", "purple", "green"]
-        
-        // const mario = document.getElementById("mario")
-        // const luigi = document.getElementById("luigi")
-        // const peach = document.getElementById("peach")
-        // const icons = [mario, luigi, peach]
-        // context.drawImage(mario, 30, 100)
-        // context.drawImage(luigi, 100, 100)
-        // context.drawImage(peach, 100, 100)
 
         // Create the Wheel class
         const wheel = new Wheel(center, radius, colors)
@@ -40,7 +27,7 @@
         context.fill();
 
         // Create the animation variables for the spinning the wheel
-        let angle_speed = 1000;
+        let angle_speed = 100;
         let random_angle = Math.floor(Math.random() * 10000);
         animate();
 
