@@ -43,7 +43,7 @@ class Wheel {
     		context.translate(this.center.x, this.center.y);
 
 			// Rotate the icon based on number of slices
-			const adjustment = 0.276508 * (Math.log2(sliceCount - 1.67377)) + 0.442939 // R^2 = 0.9977 (10 Slices)
+			const adjustment = 0.276508 * (Math.log2(sliceCount - 1.67377)) + 0.442939; // R^2 = 0.9977 (10 Slices)
 			context.rotate(endAngle+adjustment);
 
 			// Move icon up the slice and draw

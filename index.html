@@ -11,6 +11,7 @@
     <canvas id="myCanvas" width="1000" height="1000" style="border: 3px solid;"></canvas>
     <script src="wheel.js"></script>
     <script src="icon.js"></script>
+    <script src="result.js"></script>
     <script>
         // Create context for the wheel
         const context = myCanvas.getContext("2d");
@@ -18,17 +19,19 @@
         const radius = myCanvas.width * 0.4;
         const wheelBorderSize = 10;
 
+        // Create all Icons for use on the Wheel
         const marioIcon = new Icon("Mario", "Characters/mario_icon.png", "#e52521");
         const luigiIcon = new Icon("Luigi", "Characters/luigi_icon.png", "#4cbb17");
         const peachIcon = new Icon("Peach", "Characters/peach_icon.png", "#f192bd");
         const booIcon = new Icon("Boo", "Characters/boo_icon.png", "#eaf9fe");
         const paulineIcon = new Icon("Pauline", "Characters/pauline_icon.png", "#810000");
-        const yoshiIcon = new Icon("Yoshi", "Characters/yoshi_icon.png", "#68d154")
-        const plantIcon = new Icon("Piranha Plant", "Characters/plant_icon.png", "#158371")
-        const royIcon = new Icon("Roy", "Characters/roy_icon.png", "#61317d")
-        const waluigiIcon = new Icon("Waluigi", "Characters/waluigi_icon.png", "#7e0cd6")
+        const yoshiIcon = new Icon("Yoshi", "Characters/yoshi_icon.png", "#68d154");
+        const plantIcon = new Icon("Piranha Plant", "Characters/plant_icon.png", "#158371");
+        const royIcon = new Icon("Roy", "Characters/roy_icon.png", "#61317d");
+        const waluigiIcon = new Icon("Waluigi", "Characters/waluigi_icon.png", "#7e0cd6");
 
-        const icons = [marioIcon, luigiIcon, peachIcon, booIcon, paulineIcon, yoshiIcon, plantIcon, royIcon, waluigiIcon, booIcon];
+        // Icons to be used on the Wheel
+        const icons = [marioIcon, luigiIcon, peachIcon, booIcon, paulineIcon, yoshiIcon, plantIcon, royIcon, waluigiIcon];
 
         // Create the Wheel class
         const wheel = new Wheel(center, radius, icons);
@@ -52,11 +55,13 @@
                 angle_speed*=0.99;
             }
             else {
-                const pixelResultData = context.getImageData(500, 131, 1, 1);
-                alert(pixelResultData.data);
+                // Use alert to see what slice was selected based on background color
+                const pixelResultData = context.getImageData(500, 131, 1, 1).data;
+                sliceResult(pixelResultData, icons)
                 cancelAnimationFrame(animationId);
                 return;
             }
+            // Draw the wheel with a angle adjustment to simulate it spinning
             wheel.draw(context, angle);
             wheel.draw_arrow();
             let animationId = requestAnimationFrame(animate);
