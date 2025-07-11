@@ -12,6 +12,7 @@
     <script src="wheel.js"></script>
     <script src="icon.js"></script>
     <script src="result.js"></script>
+    <button id="spinButton">SPIN</button>
     <script>
         // Create context for the wheel
         const context = myCanvas.getContext("2d");
@@ -42,15 +43,26 @@
         context.fillStyle = "white";
         context.fill();
 
-        // Create the animation variables for the spinning the wheel
-        wheel.draw(context, 0);
-        let angle_speed = 1000;
-        let random_angle = Math.floor(Math.random() * 10000);
-        animate();
+        // let animationId;
+        //wheel.draw(context, 0);
+        let animationId;
+        let angle = 0;
+        let angle_speed = 0;
+        let random_angle = 0;
+
+        // Create SPIN button handler
+        document.getElementById("spinButton").addEventListener("click", () => {
+            // Draw outter wheel and begin calculating the random spinning animation
+            angle = 0
+            angle_speed = 1000;
+            random_angle = Math.floor(Math.random() * 10000);
+            // alert("Spinning")
+            animationId = requestAnimationFrame(animate);
+	    });
 
         function animate() {
             // Calculate rotation speed
-            angle = (0.1 * angle_speed) + (random_angle);
+            let angle = (0.1 * angle_speed) + (random_angle);
             if (angle_speed > 1){
                 angle_speed*=0.99;
             }
@@ -64,9 +76,8 @@
             // Draw the wheel with a angle adjustment to simulate it spinning
             wheel.draw(context, angle);
             wheel.draw_arrow();
-            let animationId = requestAnimationFrame(animate);
+            animationId = requestAnimationFrame(animate);
         }
-
     </script>
 
 </div>

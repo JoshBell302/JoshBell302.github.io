@@ -1,6 +1,28 @@
 :root {
   --bg-clr: #95efff;
-  --mario-icon: url("Characters/mario_icon.jpg")
+}
+
+@font-face {
+  font-family: 'marioFont';
+  src: url('SuperMario256.ttf') format('truetype');
+}
+
+#spinButton {
+  font-family: 'MarioFont', sans-serif;
+	font-size: 28px;
+	letter-spacing: 1px;
+  text-shadow: -1px -1px 0 #0065b3, 1px -1px 0 #0065b3, -1px 1px 0 #0065b3, 1px 1px 0 #0065b3;
+	position: absolute;
+	left: 50%;
+	bottom: 40px;
+	transform: translateX(-50%);
+	padding: 10px 25px;
+	cursor: pointer;
+	border: none;
+	background-color: #ffcc00;
+	color: #e52521;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
 body {
