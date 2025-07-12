@@ -1,42 +1,128 @@
-:root {
-  --bg-clr: #95efff;
-}
-
 @font-face {
   font-family: 'marioFont';
   src: url('SuperMario256.ttf') format('truetype');
 }
 
+:root {
+  --background-color: #95efff;
+  --mario-red: #e52521;
+  --mario-blue: #0065b3;
+  --mario-skin: #fff9c4;
+  --mario-font: 'MarioFont', sans-serif
+}
+
+/* Global Styles */
+header {
+	width: 100%;
+	box-sizing: border-box;
+	background-color: var(--mario-red);
+	color: white;
+	text-align: center;
+	padding: 40px 0;
+	font-family: var(--mario-font);
+	font-size: 48px;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+body {
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1 {
+	font-family: var(--mario-font);
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+h2 {
+	margin: 0;
+	font-size: 24px;
+	font-family: var(--mario-font);
+	letter-spacing: 2px;
+}
+
+nav {
+	width: 100%;
+	padding: 20px;
+	background-color: var(--mario-skin);
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+a {
+	transition: 0.2s ease;
+	text-decoration: none;
+}
+
+a:hover {
+	text-shadow: 1px 1px 0 #000;
+}
+
+/* Header Styles */
+nav ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 60px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+nav ul li a {
+	text-align: center;
+	color: #000;
+	font-family: var(--mario-font);
+	font-size: 24px;
+}
+
+nav ul li a:hover {
+	color: var(--mario-red);
+}
+
+h2 a {
+	color: #fff;
+}
+
+h2 a:hover {
+	color: var(--mario-blue);
+}
+
+/* Spinning Wheel Styles */
+
 #spinButton {
-  font-family: 'MarioFont', sans-serif;
+  	font-family: var(--mario-font);
 	font-size: 28px;
 	letter-spacing: 1px;
-  text-shadow: -1px -1px 0 #0065b3, 1px -1px 0 #0065b3, -1px 1px 0 #0065b3, 1px 1px 0 #0065b3;
+  	text-shadow: -1px -1px 0 var(--mario-blue), 1px -1px 0 var(--mario-blue), -1px 1px 0 var(--mario-blue), 1px 1px 0 var(--mario-blue);
 	position: absolute;
 	left: 50%;
-	bottom: 40px;
+	bottom: 2%;
 	transform: translateX(-50%);
 	padding: 10px 25px;
 	cursor: pointer;
 	border: none;
 	background-color: #ffcc00;
-	color: #e52521;
+	color: var(--mario-red);
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-body {
-  background-color: var(--bg-clr);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+#spinningWheelBody {
+  	display: flex;
+ 	justify-content: center;
+  	align-items: center;
+  	min-height: 100vh;
 }
+
+/* --- */
 
 *
 {
 	box-sizing:border-box;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  	margin: 0;
+  	padding: 0;
+  	box-sizing: border-box;
 }
