@@ -1,6 +1,9 @@
 # Changelog
+## Version 2.2.2 (July 2025)
+* Hotfix reupload header updates
+
 ## Version 2.2.1 (July 13th 2025)
-* Adjusted case sensativity due to failures on deployment
+* Adjusted case sensitivity due to failures on deployment
 * Added automatic version display updates inside website header 
 
 ## Version 2.2.0 (July 13th 2025)
