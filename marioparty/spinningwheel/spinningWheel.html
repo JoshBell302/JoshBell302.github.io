@@ -55,39 +55,37 @@
         context.fillStyle = "white";
         context.fill();
 
-        // Set variable memory to be used when Spin button is clicked
+        // Set variable memory for the animations and wheel
         const iconSize = 150;
         const arrowWidth = 50;
         const arrowLength = 90;
 
-        let animationId;
-        let angle = 0;
-        let angle_speed = 0;
-        let random_angle = 0;
+        let animationId = null;
+        let angleSpeed = 1000;
+        let randomAngle = 0;
 
         // Create SPIN button handler
         document.getElementById("spinButton").addEventListener("click", () => {
-            // Draw outter wheel and begin calculating the random spinning animation
-            angle = 0
-            angle_speed = 1000;
-            random_angle = Math.floor(Math.random() * 10000);
+            // Calculate the random angle adjustment and begin animation
+            randomAngle = Math.floor(Math.random() * 10000);
             animationId = requestAnimationFrame(animate);
 	    });
 
         function animate() {
             // Calculate rotation speed
-            let angle = (0.1 * angle_speed) + (random_angle);
-            if (angle_speed > 1){
-                angle_speed*=0.99;
+            let angle = (0.1 * angleSpeed) + (randomAngle);
+            if (angleSpeed > 1){
+                angleSpeed*=0.99;
             }
             else {
-                // Use alert to see what slice was selected based on background color
+                // Grab data of what pixel the arrow is pointing to and alert user of the landed slice
                 const pixelResultData = context.getImageData(myCanvas.width/2, (myCanvas.height/2-radius)+(arrowLength/3)+1, 1, 1).data;
                 sliceResult(pixelResultData, icons)
                 cancelAnimationFrame(animationId);
                 return;
             }
-            // Draw the wheel with a angle adjustment to simulate it spinning
+
+            // Draw the wheel with an angle adjustment to simulate it spinning
             wheel.draw(context, angle, iconSize, arrowWidth, arrowLength);
             animationId = requestAnimationFrame(animate);
         }
