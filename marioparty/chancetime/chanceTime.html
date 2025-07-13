@@ -32,19 +32,19 @@
         const wheelBorderSize = 5;
 
         // Create all Icons for use on the Wheel
-        const marioIcon = new Icon("Mario", "../Characters/mario_icon.png", "#e52521");
-        const luigiIcon = new Icon("Luigi", "../Characters/luigi_icon.png", "#4cbb17");
-        const peachIcon = new Icon("Peach", "../Characters/peach_icon.png", "#f192bd");
-        const booIcon = new Icon("Boo", "../Characters/boo_icon.png", "#eaf9fe");
-        const paulineIcon = new Icon("Pauline", "../Characters/pauline_icon.png", "#810000");
-        const yoshiIcon = new Icon("Yoshi", "../Characters/yoshi_icon.png", "#68d154");
-        const plantIcon = new Icon("Piranha Plant", "../Characters/plant_icon.png", "#158371");
-        const royIcon = new Icon("Roy", "../Characters/roy_icon.png", "#61317d");
-        const waluigiIcon = new Icon("Waluigi", "../Characters/waluigi_icon.png", "#7e0cd6");
-        const bowserIcon = new Icon("Bowser", "../Characters/bowser_icon.png", "#10a30c");
-        const rosalinaIcon = new Icon("Rosalina", "../Characters/rosalina_icon.png", "#00e6e6");
-        const lumaIcon = new Icon("Luma", "../Characters/luma_icon.png", "#ffd700");
-        const shyguyIcon = new Icon("Shy Guy", "../Characters/shyguy_icon.png", "#aa0055");
+        const marioIcon = new Icon("Mario", "../characters/mario_icon.png", "#e52521");
+        const luigiIcon = new Icon("Luigi", "../characters/luigi_icon.png", "#4cbb17");
+        const peachIcon = new Icon("Peach", "../characters/peach_icon.png", "#f192bd");
+        const booIcon = new Icon("Boo", "../characters/boo_icon.png", "#eaf9fe");
+        const paulineIcon = new Icon("Pauline", "../characters/pauline_icon.png", "#810000");
+        const yoshiIcon = new Icon("Yoshi", "../characters/yoshi_icon.png", "#68d154");
+        const plantIcon = new Icon("Piranha Plant", "../characters/plant_icon.png", "#158371");
+        const royIcon = new Icon("Roy", "../characters/roy_icon.png", "#61317d");
+        const waluigiIcon = new Icon("Waluigi", "../characters/waluigi_icon.png", "#7e0cd6");
+        const bowserIcon = new Icon("Bowser", "../characters/bowser_icon.png", "#10a30c");
+        const rosalinaIcon = new Icon("Rosalina", "../characters/rosalina_icon.png", "#00e6e6");
+        const lumaIcon = new Icon("Luma", "../characters/luma_icon.png", "#ffd700");
+        const shyguyIcon = new Icon("Shy Guy", "../characters/shyguy_icon.png", "#aa0055");
 
 
         // Icons to be used on the specific Wheels
@@ -103,7 +103,7 @@
                 cancelAnimationFrame(animationId);
                 return;
             }
-            
+
             // Draw the wheel with an angle adjustment to simulate it spinning
             leftwheel.draw(contexts[0], leftAngle, iconSize, arrowWidth, arrowLength);
             middlewheel.draw(contexts[1], middleAngle, iconSize, arrowWidth, arrowLength);

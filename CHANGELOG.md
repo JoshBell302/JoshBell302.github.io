@@ -1,4 +1,8 @@
 # Changelog
+## Version 2.2.1 (July 13th 2025)
+* Adjusted case sensativity due to failures on deployment
+* Added automatic version display updates inside website header 
+
 ## Version 2.2.0 (July 13th 2025)
 * Adjusted README.md and added a Changelog
 
@@ -45,4 +49,4 @@
 * Added basic CSS
 
 ## Version 1.0.0 (July 1st 2025)
-* Added inital HTML and basic text
+* Added initial HTML and basic text
