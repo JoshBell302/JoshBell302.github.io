@@ -55,8 +55,11 @@
         context.fillStyle = "white";
         context.fill();
 
-        // let animationId;
-        //wheel.draw(context, 0);
+        // Set variable memory to be used when Spin button is clicked
+        const iconSize = 150;
+        const arrowWidth = 50;
+        const arrowLength = 90;
+
         let animationId;
         let angle = 0;
         let angle_speed = 0;
@@ -68,7 +71,6 @@
             angle = 0
             angle_speed = 1000;
             random_angle = Math.floor(Math.random() * 10000);
-            // alert("Spinning")
             animationId = requestAnimationFrame(animate);
 	    });
 
@@ -80,14 +82,13 @@
             }
             else {
                 // Use alert to see what slice was selected based on background color
-                const pixelResultData = context.getImageData(500, 131, 1, 1).data;
+                const pixelResultData = context.getImageData(myCanvas.width/2, (myCanvas.height/2-radius)+(arrowLength/3)+1, 1, 1).data;
                 sliceResult(pixelResultData, icons)
                 cancelAnimationFrame(animationId);
                 return;
             }
             // Draw the wheel with a angle adjustment to simulate it spinning
-            wheel.draw(context, angle);
-            wheel.draw_arrow();
+            wheel.draw(context, angle, iconSize, arrowWidth, arrowLength);
             animationId = requestAnimationFrame(animate);
         }
     </script>

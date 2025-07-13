@@ -12,9 +12,96 @@
     <div id="site-header"></div>
     <script src="/header/loadHeader.js"></script>
 
-    <h1>
-        Chance Time
-    </h1>
+    <div>
+        <canvas id="leftCanvas" width="500" height="500" style="border: 3px solid;"></canvas>
+        <canvas id="middleCanvas" width="500" height="500" style="border: 3px solid;"></canvas>
+        <canvas id="rightCanvas" width="500" height="500" style="border: 3px solid;"></canvas>
+        <button id="spinButton">SPIN</button>
+    </div>
+
+    <script src="../spinningwheel/wheel.js"></script>
+    <script src="../spinningwheel/icon.js"></script>
+    <script src="../spinningwheel/result.js"></script>
+    <script>
+        // Create context for the wheel
+        // const contexts = [leftCanvas.getContext("2d"), middleCanvas.getContext("2d"), rightCanvas.getContext("2d")];
+        // const centers = [{x: leftCanvas.width / 2, y: leftCanvas.height / 2}, {x: middleCanvas.width / 2, y: middleCanvas.height / 2}, {x: rightCanvas.width / 2, y: rightCanvas.height / 2}];
+        // const radii = [leftCanvas.width * 0.4, middleCanvas.width * 0.4, rightCanvas.width * 0.4];
+
+        const context = leftCanvas.getContext("2d")
+        const center = {x: leftCanvas.width / 2, y: leftCanvas.height / 2}
+        const radius = leftCanvas.width * 0.4
+
+
+        const wheelBorderSize = 10;
+
+        // Create all Icons for use on the Wheel
+        const marioIcon = new Icon("Mario", "../Characters/mario_icon.png", "#e52521");
+        const luigiIcon = new Icon("Luigi", "../Characters/luigi_icon.png", "#4cbb17");
+        const peachIcon = new Icon("Peach", "../Characters/peach_icon.png", "#f192bd");
+        const bowserIcon = new Icon("Bowser", "../Characters/bowser_icon.png", "#10a30c");
+
+
+        // Icons to be used on the Wheel
+        const icons = [marioIcon, luigiIcon, peachIcon, bowserIcon];
+
+        // Create the Wheel class
+        // const leftwheel = new Wheel(centers[0], radii[0], icons);
+        // const middlewheel = new Wheel(centers[1], radii[1], icons);
+        // const rightwheel = new Wheel(centers[2], radii[2], icons);
+        const leftwheel = new Wheel(center, radius, icons);
+
+        // Create background wheel
+        // for (let i = 0; i < contexts.length; i++) {
+        //     contexts[i].beginPath();
+        //     contexts[i].arc(centers[i].x, centers[i].y, radii[i] + wheelBorderSize, 0, 2 * Math.PI);
+        //     contexts[i].fillStyle = "white";
+        //     contexts[i].fill();
+        // }
+        context.beginPath();
+        context.arc(center.x, center.y, radius + wheelBorderSize, 0, 2 * Math.PI);
+        context.fillStyle = "white";
+        context.fill();
+
+        // Set variable memory to be used when Spin button is clicked
+        const iconSize = 75;
+        const arrowWidth = 25;
+        const arrowLength = 45;
+
+        let animationId;
+        let angle = 0;
+        let angle_speed = 0;
+        let random_angle = 0;
+
+        // Create SPIN button handler
+        document.getElementById("spinButton").addEventListener("click", () => {
+            // Draw outter wheel and begin calculating the random spinning animation
+            angle = 0
+            angle_speed = 1000;
+            random_angle = Math.floor(Math.random() * 10000);
+            animationId = requestAnimationFrame(animate);
+	    });
+
+        function animate() {
+            // Calculate rotation speed
+            let angle = (0.1 * angle_speed) + (random_angle);
+            if (angle_speed > 1){
+                angle_speed*=0.99;
+            }
+            else {
+                // Use alert to see what slice was selected based on background color
+                const pixelResultData = context.getImageData(leftCanvas.width/2, (leftCanvas.height/2-radius)+(arrowLength/3)+1, 1, 1).data;
+                sliceResult(pixelResultData, icons)
+                cancelAnimationFrame(animationId);
+                return;
+            }
+            // Draw the wheel with a angle adjustment to simulate it spinning
+            leftwheel.draw(context, angle, iconSize, arrowWidth, arrowLength);
+            // middlewheel.draw(contexts[1], angle, 75);
+            // rightwheel.draw(contexts[2], angle, 75);
+            animationId = requestAnimationFrame(animate);
+        }
+    </script>
 </body>
 
 </html>

@@ -7,10 +7,9 @@ class Wheel {
 	}
 
 	// Draw the slices of the wheel
-	draw(context, angle) {
+	draw(context, angle, iconSize, arrowWidth, arrowLength) {
 		const sliceCount = this.icons.length;
 		const twoPI = 2 * Math.PI;
-		const iconSize = 150;
 		const iconSliceHeight = -this.radius * 0.72;
 
 		// Create Colored Wheel
@@ -21,8 +20,8 @@ class Wheel {
 
 			// Begin drawing the slices
 			context.beginPath();
-			context.moveTo(center.x, center.y);
-			context.arc(center.x, center.y, this.radius, startAngle, endAngle);
+			context.moveTo(this.center.x, this.center.y);
+			context.arc(this.center.x, this.center.y, this.radius, startAngle, endAngle);
 			context.fillStyle = this.icons[i].color;
 			context.fill();
 
@@ -30,8 +29,8 @@ class Wheel {
 			if (sliceCount > 1) {
 				context.lineWidth = 5;
 				context.beginPath();
-				context.moveTo(center.x, center.y);
-				context.arc(center.x, center.y, this.radius, startAngle, endAngle);
+				context.moveTo(this.center.x, this.center.y);
+				context.arc(this.center.x, this.center.y, this.radius, startAngle, endAngle);
 				context.strokeStyle = "white";
 				context.stroke();
 			}
@@ -51,14 +50,15 @@ class Wheel {
     		context.drawImage(this.icons[i].image, -iconSize / 2, -iconSize / 2, iconSize, iconSize);
    			context.restore();
 		}
+		this.draw_arrow(context, arrowWidth, arrowLength)
 	}
 
-	draw_arrow() {
+	draw_arrow(context, arrowWidth, arrowLength) {
 		// Draw arrow
         context.beginPath();
-		context.moveTo(475, 70);
-		context.lineTo(500, 130);
-        context.lineTo(525, 70);
+		context.moveTo(this.center.x-(arrowWidth/2), (this.center.y-this.radius)-(arrowLength/3));
+		context.lineTo(this.center.x, (this.center.y-this.radius)+(arrowLength/3));
+        context.lineTo(this.center.x+(arrowWidth/2), (this.center.y-this.radius)-(arrowLength/3));
 		context.fillStyle = "black";
 		context.fill();
 	}
