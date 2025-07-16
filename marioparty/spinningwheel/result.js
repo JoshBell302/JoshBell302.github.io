@@ -22,7 +22,7 @@ function compareRGBA(rgba1, rgba2) {
 
 function sliceResult(resultRGBA, activeIcons) {
     let noMatch = true;
-    // Go thorugh all active ICons to find a match based on pixel data and rgb
+    // Go thorugh all active Icons to find a match based on pixel data and rgb
     for (const icon of activeIcons) {
         const iconRGBA = hexToRBGA(icon.color);
         if (compareRGBA(iconRGBA, resultRGBA)) {
@@ -37,4 +37,32 @@ function sliceResult(resultRGBA, activeIcons) {
     if (noMatch) {
         alert("Spin again!");
     }
+}
+
+function chanceTimeResult(rgbas, mainIcons, centerIcons) {
+    let matches = [];
+    // Go through the list of rgba value results and match it to icon data
+    for (let i = 0; i < rgbas.length; i++) {
+        // Determine center result
+        if (i == 1) {
+            for (const icon of centerIcons) {
+                const iconRGBA = hexToRBGA(icon.color);
+                if (compareRGBA(iconRGBA, rgbas[i])) {
+                    matches.push(icon.name)
+                }
+            }
+        }
+        // Determine left and right result
+        else {
+            for (const icon of mainIcons) {
+                const iconRGBA = hexToRBGA(icon.color);
+                if (compareRGBA(iconRGBA, rgbas[i])) {
+                    matches.push(icon.name)
+                }
+            }
+        }
+    }
+    
+    // With all the matches alert the user with a proper result of chance time
+    alert(`${matches[0]} ${matches[1]} ${matches[2]}`)
 }

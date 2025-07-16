@@ -61,7 +61,7 @@ a:hover {
 }
 
 /* Header Styles */
-#header-buffer{
+#headerBuffer{
 	background-color: var(--background-color);
 	padding: 20px;
 }
@@ -113,6 +113,8 @@ h2 a:hover {
 	color: var(--mario-red);
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+
+	flex-direction: column;
 }
 
 #spinningWheelBody {
@@ -122,6 +124,19 @@ h2 a:hover {
 }
 
 /* --- */
+
+.chanceTimeCanvas {
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+.canvasContainer {
+	display: flex;
+	position: relative;
+	align-items: center;
+	flex-direction: column;
+}
 
 *
 {

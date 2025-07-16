@@ -9,11 +9,11 @@
 
 <body>
     <!-- Create the site header -->
-    <div id="site-header"></div>
+    <div id="siteHeader"></div>
     <script src="/header/loadHeader.js"></script>
 
-    <div id="spinningWheelBody">
-        <canvas id="myCanvas" width="1000" height="1000" style="border: 3px solid;"></canvas>
+    <div class="canvasContainer">
+        <canvas id="myCanvas" width="800" height="800"></canvas>
         <button id="spinButton">SPIN</button>
     </div>
 
@@ -28,19 +28,19 @@
         const wheelBorderSize = 10;
 
         // Create all Icons for use on the Wheel
-        const marioIcon = new Icon("Mario", "../characters/mario_icon.png", "#e52521");
-        const luigiIcon = new Icon("Luigi", "../characters/luigi_icon.png", "#4cbb17");
-        const peachIcon = new Icon("Peach", "../characters/peach_icon.png", "#f192bd");
-        const booIcon = new Icon("Boo", "../characters/boo_icon.png", "#eaf9fe");
-        const paulineIcon = new Icon("Pauline", "../characters/pauline_icon.png", "#810000");
-        const yoshiIcon = new Icon("Yoshi", "../characters/yoshi_icon.png", "#68d154");
-        const plantIcon = new Icon("Piranha Plant", "../characters/plant_icon.png", "#158371");
-        const royIcon = new Icon("Roy", "../characters/roy_icon.png", "#61317d");
-        const waluigiIcon = new Icon("Waluigi", "../characters/waluigi_icon.png", "#7e0cd6");
-        const bowserIcon = new Icon("Bowser", "../characters/bowser_icon.png", "#10a30c");
-        const rosalinaIcon = new Icon("Rosalina", "../characters/rosalina_icon.png", "#00e6e6");
-        const lumaIcon = new Icon("Luma", "../characters/luma_icon.png", "#ffd700");
-        const shyguyIcon = new Icon("Shy Guy", "../characters/shyguy_icon.png", "#aa0055");
+        const marioIcon = new Icon("Mario", "../images/characters/mario_icon.png", "#e52521");
+        const luigiIcon = new Icon("Luigi", "../images/characters/luigi_icon.png", "#4cbb17");
+        const peachIcon = new Icon("Peach", "../images/characters/peach_icon.png", "#f192bd");
+        const booIcon = new Icon("Boo", "../images/characters/boo_icon.png", "#eaf9fe");
+        const paulineIcon = new Icon("Pauline", "../images/characters/pauline_icon.png", "#810000");
+        const yoshiIcon = new Icon("Yoshi", "../images/characters/yoshi_icon.png", "#68d154");
+        const plantIcon = new Icon("Piranha Plant", "../images/characters/plant_icon.png", "#158371");
+        const royIcon = new Icon("Roy", "../images/characters/roy_icon.png", "#61317d");
+        const waluigiIcon = new Icon("Waluigi", "../images/characters/waluigi_icon.png", "#7e0cd6");
+        const bowserIcon = new Icon("Bowser", "../images/characters/bowser_icon.png", "#10a30c");
+        const rosalinaIcon = new Icon("Rosalina", "../images/characters/rosalina_icon.png", "#00e6e6");
+        const lumaIcon = new Icon("Luma", "../images/characters/luma_icon.png", "#ffd700");
+        const shyguyIcon = new Icon("Shy Guy", "../images/characters/shyguy_icon.png", "#aa0055");
 
 
         // Icons to be used on the Wheel

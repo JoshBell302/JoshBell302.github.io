@@ -1,5 +1,9 @@
 # Changelog
-## Version 2.2.2 (July 2025)
+## Version 2.2.3 (July 16th 2025)
+* Added Chance time arrows, and item images
+* Added single alert with proper alert response
+
+## Version 2.2.2 (July 13th 2025)
 * Hotfix reupload header updates
 
 ## Version 2.2.1 (July 13th 2025)
@@ -9,7 +13,7 @@
 ## Version 2.2.0 (July 13th 2025)
 * Adjusted README.md and added a Changelog
 
-## Version 2.1.01 (July 13th 2025)
+## Version 2.1.1 (July 13th 2025)
 * Adjusted Chance Time Wheels to be at different rotations to simulate randomness
 
 ## Version 2.1.0 (July 13th 2025)
