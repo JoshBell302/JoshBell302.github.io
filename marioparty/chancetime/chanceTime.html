@@ -15,17 +15,17 @@
     <div class="chanceTimeCanvas">
         <div class="canvasContainer">
             <canvas id="leftCanvas" width="500" height="500"></canvas>
-            <button id="spinButton">SPIN</button>
+            <button id="leftSpinButton">SPIN</button>
         </div>
 
         <div class="canvasContainer">
             <canvas id="middleCanvas" width="500" height="500"></canvas>
-            <button id="spinButton">SPIN</button>
+            <button id="middleSpinButton">SPIN</button>
         </div>
 
         <div class="canvasContainer">
             <canvas id="rightCanvas" width="500" height="500"></canvas>
-            <button id="spinButton">SPIN</button>
+            <button id="rightSpinButton">SPIN</button>
         </div>
     </div>
 
@@ -72,9 +72,9 @@
         const centerIcons = [left20, right20, left30, right30, swapcoins, leftstar, rightstar, swapstars, swapall]
 
         // Create the Wheel classes
-        const leftwheel = new Wheel(leftCenters, radii[0], mainIcons);
-        const middlewheel = new Wheel(middleCenters, radii[1], centerIcons);
-        const rightwheel = new Wheel(rightCenters, radii[2], mainIcons);
+        const leftWheel = new Wheel(leftCenters, radii[0], mainIcons);
+        const middleWheel = new Wheel(middleCenters, radii[1], centerIcons);
+        const rightWheel = new Wheel(rightCenters, radii[2], mainIcons);
 
         // Create background wheels
         for (let i = 0; i < contexts.length; i++) {
@@ -90,44 +90,82 @@
         const arrowWidth = 25;
         const arrowLength = 45;
 
-        let animationId = null;
-        let angleSpeed = 1000;
-        let leftRandomAngle = 0;
-        let middleRandomAngle = 0;
-        let rightRandomAngle = 0;
+        let wheels = [leftWheel, middleWheel, rightWheel]
+        let animationIds = [null, null, null];
+        let angleSpeeds = [1000, 1000, 1000];
+        let randomAngles = [0, 0, 0]
+        let pixelData = [null, null, null]
+        let currentSpinningWheel = null;
+
+        leftButton = document.getElementById("leftSpinButton")
+        middleButton = document.getElementById("middleSpinButton")
+        rightButton = document.getElementById("rightSpinButton")
 
         // Create SPIN button handler
-        document.getElementById("spinButton").addEventListener("click", () => {
-            // Calculate the random angle adjustments and begin animations
-            leftRandomAngle = Math.floor(Math.random() * 10000);
-            middleRandomAngle = Math.floor(Math.random() * 10000);
-            rightRandomAngle = Math.floor(Math.random() * 10000);
-            animationId = requestAnimationFrame(animate);
+        leftButton.addEventListener("click", () => {
+            // Disable other wheels while this one spins and reenable after 5 seconds
+            middleButton.disabled = true;
+            rightButton.disabled = true;
+
+            setTimeout(() => {middleButton.disabled = false;}, 5000)
+            setTimeout(() => {rightButton.disabled = false;}, 5000)
+
+            // Calculate the random angle for left wheel and begin spinning
+            currentSpinningWheel = 0;
+            angleSpeeds[currentSpinningWheel] = 1000;
+            randomAngles[currentSpinningWheel] = Math.floor(Math.random() * 10000);
+            animationIds[currentSpinningWheel] = requestAnimationFrame(animate);
+	    });
+
+        middleButton.addEventListener("click", () => {
+            // Disable other wheels while this one spins and reenable after 5 seconds
+            leftButton.disabled = true;
+            rightButton.disabled = true;
+
+            setTimeout(() => {leftButton.disabled = false;}, 5000)
+            setTimeout(() => {rightButton.disabled = false;}, 5000)
+
+            // Calculate the random angle for left wheel and begin spinning
+            currentSpinningWheel = 1;
+            angleSpeeds[currentSpinningWheel] = 1000;
+            randomAngles[currentSpinningWheel] = Math.floor(Math.random() * 10000);
+            animationIds[currentSpinningWheel] = requestAnimationFrame(animate);
+	    });
+
+        rightButton.addEventListener("click", () => {
+            // Disable other wheels while this one spins and reenable after 5 seconds
+            leftButton.disabled = true;
+            middleButton.disabled = true;
+
+            setTimeout(() => {leftButton.disabled = false;}, 5000)
+            setTimeout(() => {middleButton.disabled = false;}, 5000)
+
+            // Calculate the random angle for left wheel and begin spinning
+            currentSpinningWheel = 2;
+            angleSpeeds[currentSpinningWheel] = 1000;
+            randomAngles[currentSpinningWheel] = Math.floor(Math.random() * 10000);
+            animationIds[currentSpinningWheel] = requestAnimationFrame(animate);
 	    });
 
         function animate() {
             // Calculate rotation speed
-            let leftAngle = (0.1 * angleSpeed) + (leftRandomAngle);
-            let middleAngle = (0.1 * angleSpeed) + (middleRandomAngle);
-            let rightAngle = (0.1 * angleSpeed) + (rightRandomAngle);
-            if (angleSpeed > 1){
-                angleSpeed*=0.99;
+            let angles = (0.1 * angleSpeeds[currentSpinningWheel]) + (randomAngles[currentSpinningWheel]);
+
+            if (angleSpeeds[currentSpinningWheel] > 1){
+                angleSpeeds[currentSpinningWheel]*=0.97;
             }
             else {
                 // Grab data of what pixel the arrows are pointing to and alert user of the landed slices
-                const leftPixelResultData = contexts[0].getImageData(leftCanvas.width/2, (leftCanvas.height/2-(radii[0]))+(arrowLength/3)+1, 1, 1).data;
-                const middlePixelResultData = contexts[1].getImageData(middleCanvas.width/2, (middleCanvas.height/2-(radii[0]))+(arrowLength/3)+1, 1, 1).data;
-                const rightPixelResultData = contexts[2].getImageData(rightCanvas.width/2, (rightCanvas.height/2-(radii[0]))+(arrowLength/3)+1, 1, 1).data;
-                chanceTimeResult([leftPixelResultData, middlePixelResultData, rightPixelResultData], mainIcons, centerIcons)
-                cancelAnimationFrame(animationId);
+                const leftPixelResultData = contexts[currentSpinningWheel].getImageData(leftCanvas.width/2, (leftCanvas.height/2-(radii[0]))+(arrowLength/3)+1, 1, 1).data;
+                pixelData[currentSpinningWheel] = leftPixelResultData;
+                chanceTimeResult(pixelData, mainIcons, centerIcons);
+                cancelAnimationFrame(animationIds[currentSpinningWheel]);
                 return;
             }
 
             // Draw the wheel with an angle adjustment to simulate it spinning
-            leftwheel.draw(contexts[0], leftAngle, characterIconSize, arrowWidth, arrowLength);
-            middlewheel.draw(contexts[1], middleAngle, swapIconSize, arrowWidth, arrowLength);
-            rightwheel.draw(contexts[2], rightAngle, characterIconSize, arrowWidth, arrowLength);
-            animationId = requestAnimationFrame(animate);
+            wheels[currentSpinningWheel].draw(contexts[currentSpinningWheel], angles, characterIconSize, arrowWidth, arrowLength)
+            animationIds[currentSpinningWheel] = requestAnimationFrame(animate);
         }
     </script>
 </body>

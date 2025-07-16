@@ -43,6 +43,10 @@ function chanceTimeResult(rgbas, mainIcons, centerIcons) {
     let matches = [];
     // Go through the list of rgba value results and match it to icon data
     for (let i = 0; i < rgbas.length; i++) {
+        if (rgbas[i] === null) {
+            // If a null value is found then all wheels have yet to be spun so we must wait untill all are ready
+            return
+        }
         // Determine center result
         if (i == 1) {
             for (const icon of centerIcons) {

@@ -1,4 +1,7 @@
 # Changelog
+## Version 2.2.4 (July 16th 2025)
+* Made Chance time wheels independent 
+
 ## Version 2.2.3 (July 16th 2025)
 * Added Chance time arrows, and item images
 * Added single alert with proper alert response
