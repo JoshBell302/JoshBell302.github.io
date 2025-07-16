@@ -1,4 +1,8 @@
 # Changelog
+## Version 2.2.41 (July 16th 2025)
+* Hotfix adjusted Homepage header
+* Added Homepage to navigation 
+
 ## Version 2.2.4 (July 16th 2025)
 * Made Chance time wheels independent 
 
