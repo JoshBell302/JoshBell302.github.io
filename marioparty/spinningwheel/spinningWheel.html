@@ -46,9 +46,11 @@
         const lumaIcon = new Icon("Luma", "../images/characters/luma_icon.png", "#ffd700");
         const shyguyIcon = new Icon("Shy Guy", "../images/characters/shyguy_icon.png", "#aa0055");
 
-
-        // Icons to be used on the Wheel
+        // Icons to be used on the Wheel and ensure images are loaded
         const icons = [marioIcon, luigiIcon, bowserIcon, lumaIcon, paulineIcon, rosalinaIcon, plantIcon, royIcon, waluigiIcon, shyguyIcon];
+        Promise.all(icons.map(icon => icon.ready)).then(() => {
+            console.log("All icons loaded.");
+        });
 
         // Create the Wheel class
         const wheel = new Wheel(center, radius, icons);
@@ -82,6 +84,9 @@
                 angleSpeed*=0.99;
             }
             else {
+                // Ensure the speed is stopped and set to 0
+                angleSpeed = 0;
+
                 // Grab data of what pixel the arrow is pointing to and alert user of the landed slice
                 const pixelResultData = context.getImageData(myCanvas.width/2, (myCanvas.height/2-radius)+(arrowLength/3)+1, 1, 1).data;
                 sliceResult(pixelResultData, icons)

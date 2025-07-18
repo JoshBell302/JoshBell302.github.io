@@ -39,9 +39,7 @@
     <script>
         // Create the contexts for the wheels
         const contexts = [leftCanvas.getContext("2d"), middleCanvas.getContext("2d"), rightCanvas.getContext("2d")];
-        const leftCenters = {x: leftCanvas.width / 2, y: leftCanvas.height / 2}
-        const middleCenters = {x: middleCanvas.width / 2, y: middleCanvas.height / 2}
-        const rightCenters = {x: rightCanvas.width / 2, y: rightCanvas.height / 2}
+        const centers = [{x: leftCanvas.width / 2, y: leftCanvas.height / 2}, {x: middleCanvas.width / 2, y: middleCanvas.height / 2}, {x: rightCanvas.width / 2, y: rightCanvas.height / 2}];
         const radii = [leftCanvas.width * 0.4, middleCanvas.width * 0.4, rightCanvas.width * 0.4];
         const wheelBorderSize = 5;
 
@@ -71,26 +69,32 @@
         const swapall = new Icon("has to swap both stars and coins with", "../images/chancetime/swap_all.png", "#aabc95")
 
 
-        // Icons to be used on the specific Wheels
+        // Icons to be used on the specific Wheels and ensure all are loaded
         const mainIcons = [marioIcon, luigiIcon, peachIcon, bowserIcon];
-        const centerIcons = [left20, right20, left30, right30, swapcoins, leftstar, rightstar, swapstars, swapall]
+        Promise.all(mainIcons.map(icon => icon.ready)).then(() => {
+            console.log("All main icons loaded.");
+        });
+        const swapIcons = [left20, right20, left30, right30, swapcoins, leftstar, rightstar, swapstars, swapall]
+        Promise.all(swapIcons.map(icon => icon.ready)).then(() => {
+            console.log("All swap icons loaded.");
+        });
 
         // Create the Wheel classes
-        const leftWheel = new Wheel(leftCenters, radii[0], mainIcons);
-        const middleWheel = new Wheel(middleCenters, radii[1], centerIcons);
-        const rightWheel = new Wheel(rightCenters, radii[2], mainIcons);
+        const leftWheel = new Wheel(centers[0], radii[0], mainIcons);
+        const middleWheel = new Wheel(centers[1], radii[1], swapIcons);
+        const rightWheel = new Wheel(centers[2], radii[2], mainIcons);
 
         // Create background wheels
         for (let i = 0; i < contexts.length; i++) {
             contexts[i].beginPath();
-            contexts[i].arc(leftCenters.x, leftCenters.y, radii[i] + wheelBorderSize, 0, 2 * Math.PI);
+            contexts[i].arc(centers[i].x, centers[i].y, radii[i] + wheelBorderSize, 0, 2 * Math.PI);
             contexts[i].fillStyle = "white";
             contexts[i].fill();
         }
 
         // Set variable memory for the animations and wheels
         const characterIconSize = 75;
-        const swapIconSize = 60;
+        const swapIconSize = 65;
         const arrowWidth = 25;
         const arrowLength = 45;
 
@@ -101,18 +105,21 @@
         let pixelData = [null, null, null]
         let currentSpinningWheel = null;
 
-        leftButton = document.getElementById("leftSpinButton")
-        middleButton = document.getElementById("middleSpinButton")
-        rightButton = document.getElementById("rightSpinButton")
+        const leftButton = document.getElementById("leftSpinButton")
+        const middleButton = document.getElementById("middleSpinButton")
+        const rightButton = document.getElementById("rightSpinButton")
+        const allButtons = [leftButton, middleButton, rightButton];
 
         // Create SPIN button handler
         leftButton.addEventListener("click", () => {
-            // Disable other wheels while this one spins and reenable after 5 seconds
+            // Ensure that multiple spin clicks result in cancelling previous animations
+            if (animationIds[currentSpinningWheel] !== null) {
+                cancelAnimationFrame(animationIds[currentSpinningWheel])
+            }
+
+            // Disable other wheels while this one spins and reenable after animation is completed
             middleButton.disabled = true;
             rightButton.disabled = true;
-
-            setTimeout(() => {middleButton.disabled = false;}, 5000)
-            setTimeout(() => {rightButton.disabled = false;}, 5000)
 
             // Calculate the random angle for left wheel and begin spinning
             currentSpinningWheel = 0;
@@ -122,12 +129,14 @@
 	    });
 
         middleButton.addEventListener("click", () => {
-            // Disable other wheels while this one spins and reenable after 5 seconds
+            // Ensure that multiple spin clicks result in cancelling previous animations
+            if (animationIds[currentSpinningWheel] !== null) {
+                cancelAnimationFrame(animationIds[currentSpinningWheel])
+            }
+
+            // Disable other wheels while this one spins and reenable after animation is completed
             leftButton.disabled = true;
             rightButton.disabled = true;
-
-            setTimeout(() => {leftButton.disabled = false;}, 5000)
-            setTimeout(() => {rightButton.disabled = false;}, 5000)
 
             // Calculate the random angle for left wheel and begin spinning
             currentSpinningWheel = 1;
@@ -137,12 +146,14 @@
 	    });
 
         rightButton.addEventListener("click", () => {
-            // Disable other wheels while this one spins and reenable after 5 seconds
+            // Ensure that multiple spin clicks result in cancelling previous animations
+            if (animationIds[currentSpinningWheel] !== null) {
+                cancelAnimationFrame(animationIds[currentSpinningWheel])
+            }
+
+            // Disable other wheels while this one spins and reenable after animation is completed
             leftButton.disabled = true;
             middleButton.disabled = true;
-
-            setTimeout(() => {leftButton.disabled = false;}, 5000)
-            setTimeout(() => {middleButton.disabled = false;}, 5000)
 
             // Calculate the random angle for left wheel and begin spinning
             currentSpinningWheel = 2;
@@ -153,22 +164,36 @@
 
         function animate() {
             // Calculate rotation speed
-            let angles = (0.1 * angleSpeeds[currentSpinningWheel]) + (randomAngles[currentSpinningWheel]);
+            let angle = (0.1 * angleSpeeds[currentSpinningWheel]) + (randomAngles[currentSpinningWheel]);
 
             if (angleSpeeds[currentSpinningWheel] > 1){
                 angleSpeeds[currentSpinningWheel]*=0.97;
             }
             else {
+                // Ensure the speed is set to 0
+                angleSpeeds[currentSpinningWheel] = 0;
+
+                // Reenable buttons
+                for (let i = 0; i < allButtons.length; i++) {
+                    allButtons[i].disabled = false;
+                }
+
                 // Grab data of what pixel the arrows are pointing to and alert user of the landed slices
-                const leftPixelResultData = contexts[currentSpinningWheel].getImageData(leftCanvas.width/2, (leftCanvas.height/2-(radii[0]))+(arrowLength/3)+1, 1, 1).data;
-                pixelData[currentSpinningWheel] = leftPixelResultData;
-                chanceTimeResult(pixelData, mainIcons, centerIcons);
+                const pixelResultData = contexts[currentSpinningWheel].getImageData(leftCanvas.width/2, (leftCanvas.height/2-(radii[0]))+(arrowLength/3)+1, 1, 1).data;
+                pixelData[currentSpinningWheel] = pixelResultData;
+                chanceTimeResult(pixelData, mainIcons, swapIcons);
                 cancelAnimationFrame(animationIds[currentSpinningWheel]);
                 return;
             }
 
             // Draw the wheel with an angle adjustment to simulate it spinning
-            wheels[currentSpinningWheel].draw(contexts[currentSpinningWheel], angles, characterIconSize, arrowWidth, arrowLength)
+            if (currentSpinningWheel == 1) {
+                currentIconSize = swapIconSize;
+            }
+            else {
+                currentIconSize = characterIconSize;
+            }
+            wheels[currentSpinningWheel].draw(contexts[currentSpinningWheel], angle, currentIconSize, arrowWidth, arrowLength)
             animationIds[currentSpinningWheel] = requestAnimationFrame(animate);
         }
     </script>

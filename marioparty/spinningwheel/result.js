@@ -66,7 +66,14 @@ function chanceTimeResult(rgbas, mainIcons, centerIcons) {
             }
         }
     }
-    
-    // With all the matches alert the user with a proper result of chance time
-    alert(`${matches[0]} ${matches[1]} ${matches[2]}`)
+
+    // If two characters are the same then alert for a reroll
+    if (matches[0] === matches[2]) {
+        alert("You cannot chance time with the same character twice, spin again!")
+    }
+    else {
+        // With all the matches alert the user with a proper result of chance time
+        alert(`${matches[0]} ${matches[1]} ${matches[2]}`)
+    }
+
 }

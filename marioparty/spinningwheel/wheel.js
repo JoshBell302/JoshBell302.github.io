@@ -25,16 +25,6 @@ class Wheel {
 			context.fillStyle = this.icons[i].color;
 			context.fill();
 
-			// Draw the slice borders
-			if (sliceCount > 1) {
-				context.lineWidth = 5;
-				context.beginPath();
-				context.moveTo(this.center.x, this.center.y);
-				context.arc(this.center.x, this.center.y, this.radius, startAngle, endAngle);
-				context.strokeStyle = "white";
-				context.stroke();
-			}
-
 			// Begin adding the icon image
 			context.save();
 

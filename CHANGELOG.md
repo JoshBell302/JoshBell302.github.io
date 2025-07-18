@@ -1,4 +1,7 @@
 # Changelog
+## Version 2.2.5 (July 17th 2025)
+* Adjusting code based on performance feedback
+
 ## Version 2.2.41 (July 16th 2025)
 * Hotfix adjusted Homepage header
 * Added Homepage to navigation 
