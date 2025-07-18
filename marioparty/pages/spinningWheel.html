@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../Styles/styles.css">
+    <link rel="stylesheet" href="/marioparty/styles/styles.css">
     <title>Spinning Wheel</title>
 </head>
 
 <body>
     <!-- Create the site header -->
     <div id="siteHeader"></div>
-    <script src="/header/loadHeader.js"></script>
+    <script src="/marioparty/header/loadHeader.js"></script>
 
     <h1>
         Spin the Wheel
@@ -18,12 +18,12 @@
 
     <div class="canvasContainer" style="top:-50px">
         <canvas id="myCanvas" width="1000" height="1000"></canvas>
-        <button id="spinButton">SPIN</button>
+        <button class="spinButton" id="spinButton">SPIN</button>
     </div>
 
-    <script src="wheel.js"></script>
-    <script src="icon.js"></script>
-    <script src="result.js"></script>
+    <script src="/marioparty/scripts/wheel.js"></script>
+    <script src="/marioparty/scripts/icon.js"></script>
+    <script src="/marioparty/scripts/result.js"></script>
     <script>
         // Create context for the wheel
         const context = myCanvas.getContext("2d");

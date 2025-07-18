@@ -95,9 +95,9 @@ h2 a:hover {
 	color: var(--mario-blue);
 }
 
-/* Spinning Wheel Styles */
+/* Wheel Styles */
 
-.canvasContainer button {
+.spinButton {
   	font-family: var(--mario-font);
 	font-size: 28px;
 	letter-spacing: 1px;
@@ -121,8 +121,6 @@ h2 a:hover {
   	align-items: center;
 }
 
-/* --- */
-
 .chanceTimeCanvas {
 	display: flex;
   	justify-content: center;
@@ -135,6 +133,39 @@ h2 a:hover {
 	align-items: center;
 	flex-direction: column;
 }
+
+/* --- */
+
+/* Roulette Styles */
+    
+.rouletteSelector {
+	display: grid;
+	grid-template-columns: 1000px;
+    gap: 10px;
+    width: fit-content;
+    align-items: center;
+    margin: auto;
+}
+
+.cell {
+    width: 1000px;
+    height: 90px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+	border-radius: 10px;
+    transition: background-color 0.2s ease;
+    flex-direction: column;
+	font-family: var(--mario-font);
+}
+
+.activeCell {
+    background-color: gold;
+}
+
+/* --- */
 
 *
 {

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	if (target) {
 		// Load header HTML
-		fetch("/header/header.html")
+		fetch("/marioparty/header/header.html")
 			.then(res => res.text())
 			.then(html => {
 				target.innerHTML = html;

@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../Styles/styles.css">
+    <link rel="stylesheet" href="/marioparty/styles/styles.css">
     <title>Chance Time</title>
 </head>
 
 <body>
     <!-- Create the site header -->
     <div id="siteHeader"></div>
-    <script src="/header/loadHeader.js"></script>
+    <script src="/marioparty/header/loadHeader.js"></script>
 
     <h1>
         Chance Time
@@ -19,23 +19,23 @@
     <div class="chanceTimeCanvas">
         <div class="canvasContainer">
             <canvas id="leftCanvas" width="500" height="500"></canvas>
-            <button id="leftSpinButton">SPIN</button>
+            <button class="spinButton" id="leftSpinButton">SPIN</button>
         </div>
 
         <div class="canvasContainer">
             <canvas id="middleCanvas" width="500" height="500"></canvas>
-            <button id="middleSpinButton">SPIN</button>
+            <button class="spinButton" id="middleSpinButton">SPIN</button>
         </div>
 
         <div class="canvasContainer">
             <canvas id="rightCanvas" width="500" height="500"></canvas>
-            <button id="rightSpinButton">SPIN</button>
+            <button class="spinButton" id="rightSpinButton">SPIN</button>
         </div>
     </div>
 
-    <script src="../spinningwheel/wheel.js"></script>
-    <script src="../spinningwheel/icon.js"></script>
-    <script src="../spinningwheel/result.js"></script>
+    <script src="/marioparty/scripts/wheel.js"></script>
+    <script src="/marioparty/scripts/icon.js"></script>
+    <script src="/marioparty/scripts/result.js"></script>
     <script>
         // Create the contexts for the wheels
         const contexts = [leftCanvas.getContext("2d"), middleCanvas.getContext("2d"), rightCanvas.getContext("2d")];

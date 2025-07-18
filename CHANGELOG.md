@@ -1,4 +1,8 @@
 # Changelog
+## Version 2.2.6 (July 18th 2025)
+* Adjusted marioparty folder
+* Added roullete spins with item page example 
+
 ## Version 2.2.5 (July 17th 2025)
 * Adjusting code based on performance feedback
 
