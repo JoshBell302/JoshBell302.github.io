@@ -8,7 +8,10 @@
   --mario-red: #e52521;
   --mario-blue: #0065b3;
   --mario-skin: #fff9c4;
-  --mario-font: 'MarioFont', sans-serif
+  --mario-font: 'MarioFont', sans-serif;
+  --button-background: #ffcc00;
+  --good-cell-background: #1addff;
+  --good-cell-border: gold;
 }
 
 /* Global Styles */
@@ -109,7 +112,7 @@ h2 a:hover {
 	padding: 10px 25px;
 	cursor: pointer;
 	border: none;
-	background-color: #ffcc00;
+	background-color: var(--button-background);
 	color: var(--mario-red);
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -150,19 +153,22 @@ h2 a:hover {
 .cell {
     width: 1000px;
     height: 90px;
-    background-color: #ddd;
+    background-color: var(--good-cell-background);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 18px;
 	border-radius: 10px;
     transition: background-color 0.2s ease;
     flex-direction: column;
 	font-family: var(--mario-font);
+	border-style: solid;
+	border-width: 5px;
+	border-color: var(--good-cell-border);
 }
 
 .activeCell {
-    background-color: gold;
+    background-color: var(--good-cell-border);
 }
 
 /* --- */
