@@ -1,4 +1,7 @@
 # Changelog
+## Version 2.3.3 (July 18th 2025)
+* Added placeholder homepage
+
 ## Version 2.3.2 (July 18th 2025)
 * Added roulette to game selector
 
