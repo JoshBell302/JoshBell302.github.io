@@ -27,36 +27,19 @@
     <script type="module">
         // Import needed icons and scripts
         import { teamMinigameIcons } from "/marioparty/scripts/icon.js";
-        import { roulette } from "/marioparty/scripts/roulette.js"
+        import { roulette, cellsWithoutImage } from "/marioparty/scripts/roulette.js"
 
         const grid = document.getElementById("rouletteContainer");
         const cells = [];
 
-        // Create the cells
-        for (let i = 0; i < teamMinigameIcons.length; i++) {
-            // Create the div to hold the item and item name
-            const div = document.createElement("div");
-            div.classList.add("gameCell");
-            div.classList.add("cell");
-
-            // Create a label for the name of the item to also be viewed
-            const label = document.createElement("span");
-            label.textContent = teamMinigameIcons[i].name;
-
-            // Add elements to the div and then push the div to the rouletteSelector
-            div.appendChild(label);
-        
-            grid.appendChild(div);
-            cells.push(div);
-        }
+        const randomIcons = cellsWithoutImage(grid, cells, teamMinigameIcons)
     
-
         // Create SPIN button handler
         const startButton = document.getElementById("startButton")
         startButton.addEventListener("click", () => {
             // Disable the button untill the selector is finished
             startButton.disabled = true;
-            roulette(cells, teamMinigameIcons, startButton);
+            roulette(cells, randomIcons, startButton);
 	    });
     </script>
 </body>

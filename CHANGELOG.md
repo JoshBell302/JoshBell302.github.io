@@ -1,4 +1,8 @@
 # Changelog
+## Version 2.4.2 (July 19th 2025)
+* Adjusted roulette.js to have the cells creation and randomization
+* Completed Lucky Space and Bowser Space
+
 ## Version 2.4.1 (July 19th 2025)
 * Adjusted navigation order
 * Adjusted icon.js to harbor all icons and have pages call on certain icon lists to be used

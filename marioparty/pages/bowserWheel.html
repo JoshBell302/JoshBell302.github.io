@@ -15,6 +15,31 @@
     <h1>
         Bowser Space
     </h1>
+
+    <div>
+        <div class="rouletteSelector" id="rouletteContainer"></div>
+        <button class="spinButton" id="startButton">Start Selector</button>
+    </div>
+
+    <script type="module">
+        // Import needed icons and scripts
+        import { allBowserIcons } from "/marioparty/scripts/icon.js";
+        import { roulette, cellsWithoutImage } from "/marioparty/scripts/roulette.js"
+
+        const grid = document.getElementById("rouletteContainer");
+        const cells = [];
+
+        const numberOfIcons = 4;
+        const randomIcons = cellsWithoutImage(grid, cells, allBowserIcons, numberOfIcons)
+    
+        // Create SPIN button handler
+        const startButton = document.getElementById("startButton")
+        startButton.addEventListener("click", () => {
+            // Disable the button untill the selector is finished
+            startButton.disabled = true;
+            roulette(cells, randomIcons, startButton);
+	    });
+    </script>
 </body>
 
 </html>
