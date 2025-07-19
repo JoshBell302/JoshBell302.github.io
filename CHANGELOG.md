@@ -1,8 +1,11 @@
 # Changelog
-## Version 2.2.7 (July 18th 2025)
+## Version 2.3.2 (July 18th 2025)
+* Added roulette to game selector
+
+## Version 2.3.1 (July 18th 2025)
 * Added roulette script
 
-## Version 2.2.6 (July 18th 2025)
+## Version 2.3.0 (July 18th 2025)
 * Adjusted marioparty folder
 * Added roullete spins with item page example 
 
