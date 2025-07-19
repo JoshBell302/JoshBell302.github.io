@@ -1,4 +1,4 @@
-class Wheel {
+export class Wheel {
 	// Constructing the class
 	constructor(center, radius, icons) {
 		this.center = center; // {x, y}

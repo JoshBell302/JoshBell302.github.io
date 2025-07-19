@@ -20,7 +20,7 @@ function compareRGBA(rgba1, rgba2) {
     return true;
 }
 
-function sliceResult(resultRGBA, activeIcons) {
+export function sliceResult(resultRGBA, activeIcons) {
     let noMatch = true;
     // Go thorugh all active Icons to find a match based on pixel data and rgb
     for (const icon of activeIcons) {
@@ -39,7 +39,7 @@ function sliceResult(resultRGBA, activeIcons) {
     }
 }
 
-function chanceTimeResult(rgbas, mainIcons, centerIcons) {
+export function chanceTimeResult(rgbas, mainIcons, centerIcons) {
     let matches = [];
     // Go through the list of rgba value results and match it to icon data
     for (let i = 0; i < rgbas.length; i++) {

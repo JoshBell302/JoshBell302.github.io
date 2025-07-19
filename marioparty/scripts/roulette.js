@@ -1,4 +1,4 @@
-function roulette(cells, icons, button) {
+export function roulette(cells, icons, button) {
     // Set up cell nodes to create the simulation of roulette
     let cellNode = {head: 0, tail: 0}
     let totalSteps = Math.floor(Math.random() * icons.length) + (icons.length * 3);

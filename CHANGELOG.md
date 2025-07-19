@@ -1,4 +1,8 @@
 # Changelog
+## Version 2.4.1 (July 19th 2025)
+* Adjusted navigation order
+* Adjusted icon.js to harbor all icons and have pages call on certain icon lists to be used
+
 ## Version 2.4.0 (July 18th 2025)
 * Added all remaining pagers to be made (as of now)
 * Added hover navigation

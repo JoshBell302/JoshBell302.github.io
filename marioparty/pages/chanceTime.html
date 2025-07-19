@@ -33,56 +33,30 @@
         </div>
     </div>
 
-    <script src="/marioparty/scripts/wheel.js"></script>
-    <script src="/marioparty/scripts/icon.js"></script>
-    <script src="/marioparty/scripts/result.js"></script>
-    <script>
+    <script type="module">
+        // Import needed icons and scripts
+        import { someCharacterIcons, chanceTimeIcons } from "/marioparty/scripts/icon.js";
+        import { Wheel } from "/marioparty/scripts/wheel.js"
+        import { chanceTimeResult } from "/marioparty/scripts/result.js"
+
         // Create the contexts for the wheels
         const contexts = [leftCanvas.getContext("2d"), middleCanvas.getContext("2d"), rightCanvas.getContext("2d")];
         const centers = [{x: leftCanvas.width / 2, y: leftCanvas.height / 2}, {x: middleCanvas.width / 2, y: middleCanvas.height / 2}, {x: rightCanvas.width / 2, y: rightCanvas.height / 2}];
         const radii = [leftCanvas.width * 0.4, middleCanvas.width * 0.4, rightCanvas.width * 0.4];
         const wheelBorderSize = 5;
 
-        // Create all Icons for use on the Wheel
-        const marioIcon = new Icon("Mario", "../images/characters/mario_icon.png", "#e52521");
-        const luigiIcon = new Icon("Luigi", "../images/characters/luigi_icon.png", "#4cbb17");
-        const peachIcon = new Icon("Peach", "../images/characters/peach_icon.png", "#f192bd");
-        const booIcon = new Icon("Boo", "../images/characters/boo_icon.png", "#eaf9fe");
-        const paulineIcon = new Icon("Pauline", "../images/characters/pauline_icon.png", "#810000");
-        const yoshiIcon = new Icon("Yoshi", "../images/characters/yoshi_icon.png", "#68d154");
-        const plantIcon = new Icon("Piranha Plant", "../images/characters/plant_icon.png", "#158371");
-        const royIcon = new Icon("Roy", "../images/characters/roy_icon.png", "#61317d");
-        const waluigiIcon = new Icon("Waluigi", "../images/characters/waluigi_icon.png", "#7e0cd6");
-        const bowserIcon = new Icon("Bowser", "../images/characters/bowser_icon.png", "#10a30c");
-        const rosalinaIcon = new Icon("Rosalina", "../images/characters/rosalina_icon.png", "#00e6e6");
-        const lumaIcon = new Icon("Luma", "../images/characters/luma_icon.png", "#ffd700");
-        const shyguyIcon = new Icon("Shy Guy", "../images/characters/shyguy_icon.png", "#aa0055");
-
-        const left20 = new Icon("will recieve 20 coins from", "../images/chancetime/give_left_20.png", "#b3bca5")
-        const right20 = new Icon("has to give 20 coins to", "../images/chancetime/give_right_20.png", "#b2bba5")
-        const left30 = new Icon("will recieve 30 coins from", "../images/chancetime/give_left_30.png", "#b2bba4")
-        const right30 = new Icon("has to give 30 coins to", "../images/chancetime/give_right_30.png", "#b4bda7")
-        const swapcoins = new Icon("has to swap coins with", "../images/chancetime/swap_coins.png", "#b3c098")
-        const leftstar = new Icon("will recieve a star from", "../images/chancetime/give_left_star.png", "#bdcbae")
-        const rightstar = new Icon("has to give a star to", "../images/chancetime/give_right_star.png", "#bccaad")
-        const swapstars = new Icon("has to swap stars with", "../images/chancetime/swap_stars.png", "#afc4a0")
-        const swapall = new Icon("has to swap both stars and coins with", "../images/chancetime/swap_all.png", "#aabc95")
-
-
         // Icons to be used on the specific Wheels and ensure all are loaded
-        const mainIcons = [marioIcon, luigiIcon, peachIcon, bowserIcon];
-        Promise.all(mainIcons.map(icon => icon.ready)).then(() => {
+        Promise.all(someCharacterIcons.map(icon => icon.ready)).then(() => {
             console.log("All main icons loaded.");
         });
-        const swapIcons = [left20, right20, left30, right30, swapcoins, leftstar, rightstar, swapstars, swapall]
-        Promise.all(swapIcons.map(icon => icon.ready)).then(() => {
+        Promise.all(chanceTimeIcons.map(icon => icon.ready)).then(() => {
             console.log("All swap icons loaded.");
         });
 
         // Create the Wheel classes
-        const leftWheel = new Wheel(centers[0], radii[0], mainIcons);
-        const middleWheel = new Wheel(centers[1], radii[1], swapIcons);
-        const rightWheel = new Wheel(centers[2], radii[2], mainIcons);
+        const leftWheel = new Wheel(centers[0], radii[0], someCharacterIcons);
+        const middleWheel = new Wheel(centers[1], radii[1], chanceTimeIcons);
+        const rightWheel = new Wheel(centers[2], radii[2], someCharacterIcons);
 
         // Create background wheels
         for (let i = 0; i < contexts.length; i++) {
@@ -164,6 +138,7 @@
 
         function animate() {
             // Calculate rotation speed
+            let currentIconSize = null;
             let angle = (0.1 * angleSpeeds[currentSpinningWheel]) + (randomAngles[currentSpinningWheel]);
 
             if (angleSpeeds[currentSpinningWheel] > 1){
@@ -181,7 +156,7 @@
                 // Grab data of what pixel the arrows are pointing to and alert user of the landed slices
                 const pixelResultData = contexts[currentSpinningWheel].getImageData(leftCanvas.width/2, (leftCanvas.height/2-(radii[0]))+(arrowLength/3)+1, 1, 1).data;
                 pixelData[currentSpinningWheel] = pixelResultData;
-                chanceTimeResult(pixelData, mainIcons, swapIcons);
+                chanceTimeResult(pixelData, someCharacterIcons, chanceTimeIcons);
                 cancelAnimationFrame(animationIds[currentSpinningWheel]);
                 return;
             }

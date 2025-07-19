@@ -12,6 +12,7 @@
   --button-background: #ffcc00;
   --good-cell-background: #1addff;
   --good-cell-border: gold;
+  --roulette-cell-width: 900px;
 }
 
 /* Global Styles */
@@ -192,7 +193,7 @@ h2 a:hover {
     
 .rouletteSelector {
 	display: grid;
-	grid-template-columns: 1000px;
+	grid-template-columns: var(--roulette-cell-width);
     gap: 10px;
     width: fit-content;
     align-items: center;
@@ -200,7 +201,7 @@ h2 a:hover {
 }
 
 .cell {
-    width: 1000px;
+    width: var(--roulette-cell-width);
     height: 90px;
     background-color: var(--good-cell-background);
     display: flex;
