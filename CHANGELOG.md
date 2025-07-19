@@ -1,4 +1,9 @@
 # Changelog
+## Version 2.4.0 (July 18th 2025)
+* Added all remaining pagers to be made (as of now)
+* Added hover navigation
+* Completed minigame selectors
+
 ## Version 2.3.3 (July 18th 2025)
 * Added placeholder homepage
 

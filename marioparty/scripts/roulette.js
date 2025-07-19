@@ -27,7 +27,7 @@ function roulette(cells, icons, button) {
                 const result = cells[cellNode.head];
 
                 // Alert user of selected cell
-                alert(`Selected: ${result.textContent}`);
+                alert(`You have gotten: ${result.textContent}`);
                     
                 // Remove the active class and reenable the button
                 cells[cellNode.head].classList.remove("activeCell");

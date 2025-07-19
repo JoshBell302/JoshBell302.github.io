@@ -66,6 +66,7 @@ a:hover {
 }
 
 /* Header Styles */
+
 #headerBuffer{
 	background-color: var(--background-color);
 	padding: 10px;
@@ -99,6 +100,52 @@ h2 a {
 h2 a:hover {
 	color: var(--mario-blue);
 }
+
+.dropdown {
+	position: relative;
+}
+
+.dropdown-content {
+	display: none;
+	flex-direction: row;
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: var(--good-cell-background);
+	border: 4px solid var(--mario-red);
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	z-index: 10;
+	gap: 20px;
+	white-space: nowrap;
+	max-width: 100vw;
+	overflow-x: auto;
+}
+
+.dropdown-content li {
+	margin: 5px 0;
+}
+
+.dropdown-content a {
+	font-size: 18px;
+	color: #000;
+	text-align: center;
+	border-radius: 4px;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	color: var(--mario-red);
+	background-color: #fff2f2;
+}
+
+.dropdown:hover .dropdown-content {
+	display: flex;
+}
+
+/* --- */
 
 /* Wheel Styles */
 
@@ -207,8 +254,7 @@ h2 a:hover {
 
 *
 {
-	box-sizing:border-box;
+	box-sizing: border-box;
   	margin: 0;
   	padding: 0;
-  	box-sizing: border-box;
 }
