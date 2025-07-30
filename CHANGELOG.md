@@ -1,4 +1,7 @@
 # Changelog
+## Version 2.4.3 (July 24th 2025)
+* Adjusted
+
 ## Version 2.4.2 (July 19th 2025)
 * Adjusted roulette.js to have the cells creation and randomization
 * Completed Lucky Space and Bowser Space

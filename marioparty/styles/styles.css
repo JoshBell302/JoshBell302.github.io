@@ -108,7 +108,7 @@ h2 a:hover {
 
 .dropdown-content {
 	display: none;
-	flex-direction: row;
+	flex-direction: column;
 	position: absolute;
 	top: 100%;
 	left: 50%;
@@ -176,6 +176,7 @@ h2 a:hover {
 
 .chanceTimeCanvas {
 	display: flex;
+	flex-wrap: wrap;
   	justify-content: center;
   	align-items: center;
 }

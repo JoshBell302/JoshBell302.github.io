@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/marioparty/styles/styles.css">
+    <title>Character Dashboard</title>
+    <style>
+
+    .api-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .api-card {
+      width: 400px;
+      border: 2px solid #444;
+      border-radius: 12px;
+      padding: 16px;
+      background-color: #fffdf6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+  </style>
+</head>
+
+<body>
+    <!-- Create the site header -->
+    <div id="siteHeader"></div>
+    <script src="/marioparty/header/loadHeader.js"></script>
+
+    <h1>
+        Database
+    </h1>
+
+    <script type="module">
+        import { addPlayer, addItem, getAllActivePlayers, getAllActiveItems } from "/marioparty/scripts/api.js";
+        
+        document.getElementById("addPlayerButton").addEventListener("click", () => {
+          const name = document.getElementById("nameInput").value;
+          const char = document.getElementById("charInput").value;
+          addPlayer("test_session", name, char);
+        });
+
+        document.getElementById("addItemButton").addEventListener("click", () => {
+          const id = document.getElementById("idInput").value;
+          const itemName = document.getElementById("itemNameInput").value;
+          addItem("test_session", id, itemName);
+        });
+
+        async function showActivePlayers() {
+          const players = await getAllActivePlayers("test_session");
+          console.log('Parsed players:', players);
+
+          const resultsElement = document.getElementById("activePlayerResults");
+    
+          if (players && players.results) {
+            resultsElement.innerHTML = players.results.map(player => 
+            `<div>${player.name} as ${player.character_name}</div>`
+          ).join("");
+          } else {
+            resultsElement.innerHTML = "<div>No players found</div>";
+          }
+        }
+        showActivePlayers();
+
+        async function showActiveItems() {
+          const items = await getAllActiveItems("test_session");
+          console.log('Parsed items:', items);
+
+          const resultsElement = document.getElementById("activeItemsResults");
+    
+          if (items && items.result) {
+            resultsElement.innerHTML = items.result.map(item => 
+            `<div>${item.player_id} has a ${item.item_name}</div>`
+          ).join("");
+          } else {
+            resultsElement.innerHTML = "<div>No items found</div>";
+          }
+        }
+        showActiveItems();
+    </script>
+
+
+    <div class="api-container">
+        <!--Add Player-->
+        <div class="api-card">
+            <h2>Add Player</h2>
+            <div style="margin-top: 10px;">
+                <label for="nameInput">Name:</label>
+                <input type="text" id="nameInput" placeholder="Enter name">
+            </div>
+            <div style="margin-top: 5px;">
+                <label for="charInput">Character:</label>
+                <input type="text" id="charInput" placeholder="Enter character">
+            </div>
+            <button id="addPlayerButton" style="margin-top: 10px; margin-bottom: 10px;">Add Player</button>
+
+            <div>
+                <h2>Active Players</h2>
+                <p id="activePlayerResults"></p>
+            </div>
+        
+        
+        </div>
+
+        <!--Add Item-->
+        <div class="api-card">
+            <h2>Add Item</h2>
+            <div style="margin-top: 10px;">
+                <label for="nameInput">Player ID:</label>
+                <input type="text" id="idInput" placeholder="Enter ID">
+            </div>
+            <div style="margin-top: 5px;">
+                <label for="charInput">Item Name:</label>
+                <input type="text" id="itemNameInput" placeholder="Enter Item Name">
+            </div>
+            <button id="addItemButton" style="margin-top: 10px; margin-bottom: 10px;">Add Item</button>
+
+            <div>
+                <h2>Active Items</h2>
+                <p id="activeItemsResults"></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
