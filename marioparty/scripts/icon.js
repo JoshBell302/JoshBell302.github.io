@@ -86,16 +86,14 @@ const messyMemoryIcon = new Icon("Messy Memory", "../images/other/question_mark.
 const lucyCupIcon = new Icon("Lucky Cup", "../images/other/question_mark.jpg", null, null); 
 const coinPongIcon = new Icon("Coin Pong", "../images/other/question_mark.jpg", null, null); 
 const chopstickRelayIcon = new Icon("Chopstick Relay", "../images/other/question_mark.jpg", null, null); 
-const bobbingForApplesIcon = new Icon("Bobbing for Apples", "../images/other/question_mark.jpg", null, null); 
 const makingFacesIcon = new Icon("Making Faces", "../images/other/question_mark.jpg", null, null); 
 const luckOfTheDiceIcon = new Icon("Luck of the Dice", "../images/other/question_mark.jpg", null, null); 
-const passTheWaterIcon = new Icon("Pass the Water", "../images/other/question_mark.jpg", null, null); 
     
 export let freeForAllMinigameIcons = [
 	musicalChairsIcon, redlLightGreenLightIcon, messyMemoryIcon, lucyCupIcon, coinPongIcon
 ];
 export let teamMinigameIcons = [
-	chopstickRelayIcon, bobbingForApplesIcon, makingFacesIcon, luckOfTheDiceIcon, passTheWaterIcon
+	chopstickRelayIcon, makingFacesIcon, luckOfTheDiceIcon
 ];
 
 // Lucky Space Icons
@@ -106,14 +104,19 @@ const recieve12CoinsIcon = new Icon("Recieve 12 Coins", "../images/items/coin_st
 const recieve15CoinsIcon = new Icon("Recieve 15 Coins", "../images/items/coin_stack.png", null, null);
 const recieve20CoinsIcon = new Icon("Recieve 20 Coins", "../images/items/coin_stack.png", null, null);
 const recievedoubleIcon = new Icon("Recieve Double Dice", "../images/items/double_dice.png", null, null);
+const recievedoublePayIcon = new Icon("Recieve Double Payday Dice", "../images/items/payday_double.png", null, null);
+const recieveTriplePayIcon = new Icon("Recieve Triple Payday Dice", "../images/items/payday_triple.png", null, null);
 const recieveTripleIcon = new Icon("Recieve Triple Dice", "../images/items/triple_dice.png", null, null);
 const recieveCustomIcon = new Icon("Recieve a Custom Dice", "../images/items/custom_dice.png", null, null)
 const recieveMushroomIcon = new Icon("Recieve a Mushroom", "../images/items/mushroom.png", null, null);
 const recieveMirrorIcon = new Icon("Recieve a Mirror", "../images/items/mirror.png", null, null);
+const recieveSuperMirrorIcon = new Icon("Recieve a Super Mirror", "../images/items/super_mirror.png", null, null);
+const recieveGoldenPipeIcon = new Icon("Recieve a Golden Pipe", "../images/items/golden_pipe.png", null, null);
 
 export let allLuckyIcons = [
 	recieve5CoinsIcon, recieve7CoinsIcon, recieve10CoinsIcon, recieve12CoinsIcon, recieve15CoinsIcon, recieve20CoinsIcon,
-	recievedoubleIcon, recieveTripleIcon, recieveCustomIcon, recieveMushroomIcon, recieveMirrorIcon
+	recievedoubleIcon, recieveTripleIcon, recieveCustomIcon, recieveMushroomIcon, recieveMirrorIcon,
+	recievedoublePayIcon, recieveTriplePayIcon, recieveSuperMirrorIcon, recieveGoldenPipeIcon
 ];
 
 // Bowser Space Icons

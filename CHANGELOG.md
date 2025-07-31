@@ -1,4 +1,8 @@
 # Changelog
+## Version 3.2.3 (July 31st 2025)
+* Updated item pools for Lucky Space and Item Space
+* Updated game pools
+
 ## Version 3.2.2 (July 31st 2025)
 * Updated to have the Database tab have access to updating coins and stars
 
