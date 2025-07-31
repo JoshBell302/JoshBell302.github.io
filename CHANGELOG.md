@@ -1,6 +1,10 @@
 # Changelog
+## Version 3.1.0 (July 30th 2025)
+* Added Delete Player and Items in Database
+* Added Sessions
+
 ## Version 3.0.1 (July 30th 2025)
-* Updaated CHANGELOG
+* Updated CHANGELOG
 
 ## Version 3.0.0 (July 30th 2025)
 * Added marioparty-backend, SQL database, and API connections

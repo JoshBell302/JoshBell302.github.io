@@ -40,19 +40,50 @@
     </h1>
 
     <script type="module">
-        import { addPlayer, addItem, getAllActivePlayers, getAllActiveItems } from "/marioparty/scripts/api.js";
+        import { addPlayer, deletePlayer, addItem, deleteItem, addSession, deleteSession, getAllActivePlayers, getAllActiveItems, getActiveSession } from "/marioparty/scripts/api.js";
         
         document.getElementById("addPlayerButton").addEventListener("click", () => {
           const name = document.getElementById("nameInput").value;
           const char = document.getElementById("charInput").value;
           addPlayer("test_session", name, char);
+          showActivePlayers();
         });
 
         document.getElementById("addItemButton").addEventListener("click", () => {
           const id = document.getElementById("idInput").value;
           const itemName = document.getElementById("itemNameInput").value;
           addItem("test_session", id, itemName);
+          showActiveItems();
         });
+
+        document.getElementById("deletePlayerButton").addEventListener("click", () => {
+          const id = document.getElementById("deletePlayerInput").value;
+          deletePlayer(id);
+          showActivePlayers();
+        });
+
+        document.getElementById("deleteItemButton").addEventListener("click", () => {
+          const id = document.getElementById("deleteItemInput").value;
+          deleteItem(id);
+          showActiveItems();
+        });
+
+        document.getElementById("addSessionButton").addEventListener("click", () => {
+          const id = document.getElementById("addSessionInput").value;
+          addSession(id);
+          showActivePlayers();
+          showActiveItems();
+          showActiveSession();
+        });
+
+        document.getElementById("deleteSessionButton").addEventListener("click", () => {
+          deleteSession();
+          showActivePlayers();
+          showActiveItems();
+          showActiveSession();
+        });
+
+        
 
         async function showActivePlayers() {
           const players = await getAllActivePlayers("test_session");
@@ -62,7 +93,7 @@
     
           if (players && players.results) {
             resultsElement.innerHTML = players.results.map(player => 
-            `<div>${player.name} as ${player.character_name}</div>`
+            `<div>${player.name} as ${player.character_name} with ID ${player.id}</div>`
           ).join("");
           } else {
             resultsElement.innerHTML = "<div>No players found</div>";
@@ -78,13 +109,27 @@
     
           if (items && items.result) {
             resultsElement.innerHTML = items.result.map(item => 
-            `<div>${item.player_id} has a ${item.item_name}</div>`
+            `<div>${item.player_id} has a ${item.item_name} with ID ${item.id}</div>`
           ).join("");
           } else {
             resultsElement.innerHTML = "<div>No items found</div>";
           }
         }
         showActiveItems();
+
+        async function showActiveSession() {
+          const session = await getActiveSession();
+          console.log('Parse session:', session);
+
+          const resultsElement = document.getElementById("activeSessionResults");
+    
+          if (session && session.result.length != 0) {
+            resultsElement.innerHTML = `<div>Active Session ID of '${session.result[0].session_id}'</div>`
+          } else {
+            resultsElement.innerHTML = "<div>No Active Session found</div>";
+          }
+        }
+        showActiveSession();
     </script>
 
 
@@ -93,11 +138,11 @@
         <div class="api-card">
             <h2>Add Player</h2>
             <div style="margin-top: 10px;">
-                <label for="nameInput">Name:</label>
+                <label>Name:</label>
                 <input type="text" id="nameInput" placeholder="Enter name">
             </div>
             <div style="margin-top: 5px;">
-                <label for="charInput">Character:</label>
+                <label>Character:</label>
                 <input type="text" id="charInput" placeholder="Enter character">
             </div>
             <button id="addPlayerButton" style="margin-top: 10px; margin-bottom: 10px;">Add Player</button>
@@ -118,7 +163,7 @@
                 <input type="text" id="idInput" placeholder="Enter ID">
             </div>
             <div style="margin-top: 5px;">
-                <label for="charInput">Item Name:</label>
+                <label>Item Name:</label>
                 <input type="text" id="itemNameInput" placeholder="Enter Item Name">
             </div>
             <button id="addItemButton" style="margin-top: 10px; margin-bottom: 10px;">Add Item</button>
@@ -127,6 +172,47 @@
                 <h2>Active Items</h2>
                 <p id="activeItemsResults"></p>
             </div>
+        </div>
+
+        <!--Delete Player-->
+        <div class="api-card">
+            <h2>Delete Player</h2>
+            <div style="margin-top: 10px;">
+                <label>Player ID:</label>
+                <input type="text" id="deletePlayerInput" placeholder="Enter ID">
+            </div>
+            <button id="deletePlayerButton" style="margin-top: 10px; margin-bottom: 10px;">Delete Player</button>
+        </div>
+
+        <!--Delete Item-->
+        <div class="api-card">
+            <h2>Delete Item</h2>
+            <div style="margin-top: 10px;">
+                <label>Item ID:</label>
+                <input type="text" id="deleteItemInput" placeholder="Enter ID">
+            </div>
+            <button id="deleteItemButton" style="margin-top: 10px; margin-bottom: 10px;">Delete Item</button>
+        </div>
+
+        <!--Add Session-->
+        <div class="api-card">
+            <h2>Add Session</h2>
+            <div style="margin-top: 10px;">
+                <label>Session ID:</label>
+                <input type="text" id="addSessionInput" placeholder="Enter ID">
+            </div>
+            <button id="addSessionButton" style="margin-top: 10px; margin-bottom: 10px;">Add Session</button>
+            
+            <div>
+                <h2>Active Session</h2>
+                <p id="activeSessionResults"></p>
+            </div>
+        </div>
+
+        <!--Delete Session-->
+        <div class="api-card">
+            <h2>Delete Session</h2>
+            <button id="deleteSessionButton" style="margin-top: 10px; margin-bottom: 10px;">Delete Session</button>
         </div>
     </div>
 
