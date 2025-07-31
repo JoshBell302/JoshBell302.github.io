@@ -1,4 +1,7 @@
 # Changelog
+## Version 3.1.2 (July 31st 2025)
+* Added Character and Item Showcase
+
 ## Version 3.1.1 (July 30th 2025)
 * Updated Database to only show active session players and items
 

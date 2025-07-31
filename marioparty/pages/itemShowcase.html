@@ -15,6 +15,16 @@
     <h1>
         Item Showcase
     </h1>
+
+    <div class="cardContainer" id="cardContainer"></div>
+
+    <script type="module">
+        import { allItemIcons } from "/marioparty/scripts/icon.js";
+        import { createCards } from "/marioparty/scripts/card.js";
+
+        const grid = document.getElementById("cardContainer");
+        createCards(grid, allItemIcons)
+    </script>
 </body>
 
 </html>

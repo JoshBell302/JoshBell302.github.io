@@ -5,29 +5,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/marioparty/styles/styles.css">
     <title>Character Dashboard</title>
-    <style>
-
-    .api-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .api-card {
-      width: 400px;
-      border: 2px solid #444;
-      border-radius: 12px;
-      padding: 16px;
-      background-color: #fffdf6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-    }
-
-  </style>
 </head>
 
 <body>
@@ -40,8 +17,13 @@
     </h1>
 
     <script type="module">
-        import { addPlayer, deletePlayer, addItem, deleteItem, addSession, deleteSession, getAllActivePlayers, getAllActiveItems, getActiveSession } from "/marioparty/scripts/api.js";
+        import { addPlayer, deletePlayer, addItem, deleteItem, 
+            addSession, deleteSession, getAllActivePlayers, 
+            getAllActiveItems, getActiveSession 
+        } from "/marioparty/scripts/api.js";
         
+        // Button Listeners ---------------------
+        // Add Player
         document.getElementById("addPlayerButton").addEventListener("click", () => {
           const name = document.getElementById("nameInput").value;
           const char = document.getElementById("charInput").value;
@@ -49,6 +31,7 @@
           showActivePlayers();
         });
 
+        // Add Item
         document.getElementById("addItemButton").addEventListener("click", () => {
           const id = document.getElementById("idInput").value;
           const itemName = document.getElementById("itemNameInput").value;
@@ -56,18 +39,21 @@
           showActiveItems();
         });
 
+        // Delete Player
         document.getElementById("deletePlayerButton").addEventListener("click", () => {
           const id = document.getElementById("deletePlayerInput").value;
           deletePlayer(id);
           showActivePlayers();
         });
 
+        // Delete Item
         document.getElementById("deleteItemButton").addEventListener("click", () => {
           const id = document.getElementById("deleteItemInput").value;
           deleteItem(id);
           showActiveItems();
         });
 
+        // Add Session
         document.getElementById("addSessionButton").addEventListener("click", () => {
           const id = document.getElementById("addSessionInput").value;
           addSession(id);
@@ -76,14 +62,14 @@
           showActiveSession();
         });
 
+        // Delete Session
         document.getElementById("deleteSessionButton").addEventListener("click", () => {
           deleteSession();
           showActivePlayers();
           showActiveItems();
           showActiveSession();
         });
-
-        
+        // --------------------------------------
 
         async function showActivePlayers() {
           const players = await getAllActivePlayers();
@@ -132,10 +118,9 @@
         showActiveSession();
     </script>
 
-
-    <div class="api-container">
+    <div class="apiContainer">
         <!--Add Player-->
-        <div class="api-card">
+        <div class="apiCard">
             <h2>Add Player</h2>
             <div style="margin-top: 10px;">
                 <label>Name:</label>
@@ -156,7 +141,7 @@
         </div>
 
         <!--Add Item-->
-        <div class="api-card">
+        <div class="apiCard">
             <h2>Add Item</h2>
             <div style="margin-top: 10px;">
                 <label for="nameInput">Player ID:</label>
@@ -175,7 +160,7 @@
         </div>
 
         <!--Delete Player-->
-        <div class="api-card">
+        <div class="apiCard">
             <h2>Delete Player</h2>
             <div style="margin-top: 10px;">
                 <label>Player ID:</label>
@@ -185,7 +170,7 @@
         </div>
 
         <!--Delete Item-->
-        <div class="api-card">
+        <div class="apiCard">
             <h2>Delete Item</h2>
             <div style="margin-top: 10px;">
                 <label>Item ID:</label>
@@ -195,7 +180,7 @@
         </div>
 
         <!--Add Session-->
-        <div class="api-card">
+        <div class="apiCard">
             <h2>Add Session</h2>
             <div style="margin-top: 10px;">
                 <label>Session ID:</label>
@@ -210,7 +195,7 @@
         </div>
 
         <!--Delete Session-->
-        <div class="api-card">
+        <div class="apiCard">
             <h2>Delete Session</h2>
             <button id="deleteSessionButton" style="margin-top: 10px; margin-bottom: 10px;">Delete Session</button>
         </div>

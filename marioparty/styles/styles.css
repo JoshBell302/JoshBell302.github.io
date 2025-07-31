@@ -13,6 +13,8 @@
   --good-cell-background: #1addff;
   --good-cell-border: gold;
   --roulette-cell-width: 900px;
+  --card-background:#ffffffcc;
+  --card-border: #444;
 }
 
 /* Global Styles */
@@ -236,8 +238,8 @@ h2 a:hover {
 .description, .rules {
     max-width: 800px;
     margin: 30px auto;
-    background: #ffffffcc;
-    border: 2px solid #ccc;
+    background: var(--card-background);
+    border: 2px solid var(--card-border);
     border-radius: 12px;
     padding: 20px;
 }
@@ -250,6 +252,77 @@ h2 a:hover {
 .homepageSectionTitle {
 	font-size: 30px;
 	padding-bottom: 20px;
+}
+
+/* --- */
+
+/* Database Styles */
+
+.apiContainer {
+	display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.apiCard {
+    width: 400px;
+    border: 2px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px;
+    background-color: var(--card-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- */
+
+/* Card Styles */
+
+.cardContainer {
+	display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.infoCard {
+    display: flex;
+    border: 2px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: var(--card-background);
+}
+
+.infoImage {
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+    background-color: #ddd;
+}
+
+.infoDetails {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    flex: 1;
+}
+
+.infoName {
+	font-family: var(--mario-font);
+    font-size: 30px;
+    margin-bottom: 4px;
+}
+
+.infoDescription {
+    font-size: 20px;
+    color: #555;
 }
 
 /* --- */

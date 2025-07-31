@@ -5,6 +5,49 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/marioparty/styles/styles.css">
     <title>Character Showcase</title>
+    <style>
+        .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .info-card {
+      display: flex;
+      border: 2px solid #333;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #f8f8f8;
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .info-image {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      background-color: #ddd;
+    }
+
+    .info-details {
+        width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      flex: 1;
+    }
+
+    .info-name {
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+    </style>
 </head>
 
 <body>
@@ -15,6 +58,16 @@
     <h1>
         Character Showcase
     </h1>
+
+    <div class="cardContainer" id="cardContainer"></div>
+
+    <script type="module">
+        import { allCharacterIcons } from "/marioparty/scripts/icon.js";
+        import { createCards } from "/marioparty/scripts/card.js";
+
+        const grid = document.getElementById("cardContainer");
+        createCards(grid, allCharacterIcons)
+    </script>
 </body>
 
 </html>
