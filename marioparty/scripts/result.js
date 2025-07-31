@@ -23,6 +23,7 @@ function compareRGBA(rgba1, rgba2) {
 export function sliceResult(resultRGBA, activeIcons) {
     let noMatch = true;
     // Go thorugh all active Icons to find a match based on pixel data and rgb
+    console.log(activeIcons)
     for (const icon of activeIcons) {
         const iconRGBA = hexToRBGA(icon.color);
         if (compareRGBA(iconRGBA, resultRGBA)) {

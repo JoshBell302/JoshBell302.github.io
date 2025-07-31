@@ -1,4 +1,10 @@
 # Changelog
+## Version 3.2.1 (July 31st 2025)
+* Updated Wheels to only use active characters
+
+## Version 3.2.0 (July 31st 2025)
+* Added Player Dashboard to show Active players with their Coin, Stars and Items
+
 ## Version 3.1.2 (July 31st 2025)
 * Added Character and Item Showcase
 

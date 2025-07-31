@@ -23,7 +23,7 @@
 
     <script type="module">
         // Import needed icons and scripts
-        import { allCharacterIcons } from "/marioparty/scripts/icon.js";
+        import { allCharacterIcons, getActivePlayerIcons } from "/marioparty/scripts/icon.js";
         import { Wheel } from "/marioparty/scripts/wheel.js"
         import { sliceResult } from "/marioparty/scripts/result.js"
 
@@ -32,6 +32,7 @@
         const center = {x: myCanvas.width / 2, y: myCanvas.height / 2};
         const radius = myCanvas.width * 0.4;
         const wheelBorderSize = 10;
+        const activeIcons = await getActivePlayerIcons()
 
         // Icons to be used on the Wheel and ensure images are loaded
         Promise.all(allCharacterIcons.map(icon => icon.ready)).then(() => {
@@ -39,7 +40,7 @@
         });
 
         // Create the Wheel class
-        const wheel = new Wheel(center, radius, allCharacterIcons);
+        const wheel = new Wheel(center, radius, activeIcons );
 
         // Create background wheel
         context.beginPath();
@@ -48,7 +49,7 @@
         context.fill();
 
         // Set variable memory for the animations and wheel
-        const iconSize = 200 - (5 * allCharacterIcons.length);
+        const iconSize = 200 - (5 * activeIcons.length);
         const arrowWidth = 50;
         const arrowLength = 90;
 
@@ -75,7 +76,7 @@
 
                 // Grab data of what pixel the arrow is pointing to and alert user of the landed slice
                 const pixelResultData = context.getImageData(myCanvas.width/2, (myCanvas.height/2-radius)+(arrowLength/3)+1, 1, 1).data;
-                sliceResult(pixelResultData, allCharacterIcons)
+                sliceResult(pixelResultData, activeIcons)
                 cancelAnimationFrame(animationId);
                 return;
             }

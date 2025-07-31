@@ -1,3 +1,6 @@
+import { getAllActivePlayers, getAllActiveItems } from "./api.js";
+import { findMatchingCharacterIconbyName } from "./card.js";
+
 class Icon {
     // Constructing the class
 	constructor(name, imagePath, color, description) {
@@ -125,3 +128,16 @@ const loseAStar = new Icon("Lose a Star", "../images/other/question_mark.jpg", n
 export let allBowserIcons = [
 	lose10Coins, lose15Coins, lose20Coins, lose30Coins, loseHalfCoins, allLose10Coins, loseAStar
 ];
+
+export async function getActivePlayerIcons() {
+	const activePlayers = await getAllActivePlayers();
+	let matches = [];
+	for (let i = 0; i < activePlayers.results.length; i++) {
+		for (let j = 0; j < allCharacterIcons.length; j++) {
+        	if (activePlayers.results[i].character_name == allCharacterIcons[j].name) {
+				matches.push(allCharacterIcons[j]);
+        	}
+    	}
+	}
+	return matches
+}
