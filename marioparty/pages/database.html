@@ -86,7 +86,7 @@
         
 
         async function showActivePlayers() {
-          const players = await getAllActivePlayers("test_session");
+          const players = await getAllActivePlayers();
           console.log('Parsed players:', players);
 
           const resultsElement = document.getElementById("activePlayerResults");
@@ -102,7 +102,7 @@
         showActivePlayers();
 
         async function showActiveItems() {
-          const items = await getAllActiveItems("test_session");
+          const items = await getAllActiveItems();
           console.log('Parsed items:', items);
 
           const resultsElement = document.getElementById("activeItemsResults");

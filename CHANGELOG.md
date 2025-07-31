@@ -1,4 +1,7 @@
 # Changelog
+## Version 3.1.1 (July 30th 2025)
+* Updated Database to only show active session players and items
+
 ## Version 3.1.0 (July 30th 2025)
 * Added Delete Player and Items in Database
 * Added Sessions

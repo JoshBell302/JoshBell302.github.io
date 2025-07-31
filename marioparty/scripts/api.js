@@ -28,7 +28,12 @@ export function deletePlayer(player_id) {
     .catch(err => console.error('Error deleting player:', err));
 }
 
-export async function getAllActivePlayers(session_id) {
+export async function getAllActivePlayers() {
+    // Get Active session_id
+    const session = await getActiveSession();
+    const session_id = session.result[0].session_id
+    setTimeout(1500)
+
     // Report to console the call
     console.log(`Calling: 'GET | ${API_URL}/api/players/${session_id}'`)
 
@@ -83,7 +88,12 @@ export function deleteItem(item_id) {
     .catch(err => console.error('Error deleting item:', err));
 }
 
-export async function getAllActiveItems(session_id) {
+export async function getAllActiveItems() {
+    // Get Active session_id
+    const session = await getActiveSession();
+    const session_id = session.result[0].session_id
+    setTimeout(1500)
+
     // Report to console the call
     console.log(`Calling: 'GET | ${API_URL}/api/items/${session_id}'`)
 
