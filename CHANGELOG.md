@@ -1,4 +1,7 @@
 # Changelog
+## Version 3.2.4 (July 31st 2025)
+* Updated Header for game day
+
 ## Version 3.2.3 (July 31st 2025)
 * Updated item pools for Lucky Space and Item Space
 * Updated game pools
