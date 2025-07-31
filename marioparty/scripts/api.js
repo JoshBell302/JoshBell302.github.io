@@ -28,6 +28,34 @@ export function deletePlayer(player_id) {
     .catch(err => console.error('Error deleting player:', err));
 }
 
+export function updateCoins(player_id, coins) {
+    // Report to console the call
+    console.log(`Calling: 'PUT | ${API_URL}/api/players/${player_id}/coins'`)
+    
+    // Call the API
+    fetch(`${API_URL}/api/players/${player_id}/coins`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ coins })
+    })
+    .then(res => res.json())
+    .catch(err => console.error('Error updating coins:', err));
+}
+
+export function updateStars(player_id, stars) {
+    // Report to console the call
+    console.log(`Calling: 'PUT | ${API_URL}/api/players/${player_id}/stars'`)
+    
+    // Call the API
+    fetch(`${API_URL}/api/players/${player_id}/stars`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ stars })
+    })
+    .then(res => res.json())
+    .catch(err => console.error('Error updating stars:', err));
+}
+
 export async function getAllActivePlayers() {
     // Get Active session_id
     const session = await getActiveSession();

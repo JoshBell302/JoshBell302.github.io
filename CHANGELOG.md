@@ -1,4 +1,7 @@
 # Changelog
+## Version 3.2.2 (July 31st 2025)
+* Updated to have the Database tab have access to updating coins and stars
+
 ## Version 3.2.1 (July 31st 2025)
 * Updated Wheels to only use active characters
 

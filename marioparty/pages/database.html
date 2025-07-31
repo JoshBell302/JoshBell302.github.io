@@ -8,114 +8,131 @@
 </head>
 
 <body>
-    <!-- Create the site header -->
-    <div id="siteHeader"></div>
-    <script src="/marioparty/header/loadHeader.js"></script>
+  <!-- Create the site header -->
+  <div id="siteHeader"></div>
+  <script src="/marioparty/header/loadHeader.js"></script>
 
-    <h1>
-        Database
-    </h1>
+  <h1>Database</h1>
 
-    <script type="module">
-        import { addPlayer, deletePlayer, addItem, deleteItem, 
-            addSession, deleteSession, getAllActivePlayers, 
-            getAllActiveItems, getActiveSession 
-        } from "/marioparty/scripts/api.js";
+  <script type="module">
+    import { addPlayer, deletePlayer, updateCoins, updateStars, 
+      addItem, deleteItem, addSession, deleteSession, 
+      getAllActivePlayers, getAllActiveItems, getActiveSession
+    } from "/marioparty/scripts/api.js";
         
-        // Button Listeners ---------------------
-        // Add Player
-        document.getElementById("addPlayerButton").addEventListener("click", () => {
-          const name = document.getElementById("nameInput").value;
-          const char = document.getElementById("charInput").value;
-          addPlayer("test_session", name, char);
-          showActivePlayers();
-        });
+    // Button Listeners ---------------------
+    // Add Player
+    document.getElementById("addPlayerButton").addEventListener("click", () => {
+      const name = document.getElementById("addPlayerNameInput").value;
+      const character = document.getElementById("addPlayerCharacterInput").value;
+      const session = document.getElementById("addPlayerSessionInput").value;
+      addPlayer(session, name, character);
+      showActivePlayers();
+    });
 
-        // Add Item
-        document.getElementById("addItemButton").addEventListener("click", () => {
-          const id = document.getElementById("idInput").value;
-          const itemName = document.getElementById("itemNameInput").value;
-          addItem("test_session", id, itemName);
-          showActiveItems();
-        });
+    // Add Item
+    document.getElementById("addItemButton").addEventListener("click", () => {
+      const id = document.getElementById("addItemIdInput").value;
+      const itemName = document.getElementById("addItemNameInput").value;
+      const session = document.getElementById("addItemSessionInput").value;
+      addItem(session, id, itemName);
+      showActiveItems();
+    });
 
-        // Delete Player
-        document.getElementById("deletePlayerButton").addEventListener("click", () => {
-          const id = document.getElementById("deletePlayerInput").value;
-          deletePlayer(id);
-          showActivePlayers();
-        });
+    // Update Coins
+    document.getElementById("updateCoinsButton").addEventListener("click", () => {
+      const id = document.getElementById("updateCoinsIdInput").value;
+      const number = document.getElementById("updateCoinsNumberInput").value;
+      updateCoins(id, number);
+    });
 
-        // Delete Item
-        document.getElementById("deleteItemButton").addEventListener("click", () => {
-          const id = document.getElementById("deleteItemInput").value;
-          deleteItem(id);
-          showActiveItems();
-        });
+    // Update Stars
+    document.getElementById("updateStarsButton").addEventListener("click", () => {
+      const id = document.getElementById("updateStarsIdInput").value;
+      const number = document.getElementById("updateStarsNumberInput").value;
+      updateStars(id, number);
+    });
 
-        // Add Session
-        document.getElementById("addSessionButton").addEventListener("click", () => {
-          const id = document.getElementById("addSessionInput").value;
-          addSession(id);
-          showActivePlayers();
-          showActiveItems();
-          showActiveSession();
-        });
+    // Delete Player
+    document.getElementById("deletePlayerButton").addEventListener("click", () => {
+      const id = document.getElementById("deletePlayerInput").value;
+      deletePlayer(id);
+      showActivePlayers();
+    });
 
-        // Delete Session
-        document.getElementById("deleteSessionButton").addEventListener("click", () => {
-          deleteSession();
-          showActivePlayers();
-          showActiveItems();
-          showActiveSession();
-        });
-        // --------------------------------------
+    // Delete Item
+    document.getElementById("deleteItemButton").addEventListener("click", () => {
+      const id = document.getElementById("deleteItemInput").value;
+      deleteItem(id);
+      showActiveItems();
+    });
 
-        async function showActivePlayers() {
-          const players = await getAllActivePlayers();
-          console.log('Parsed players:', players);
+    // Add Session
+    document.getElementById("addSessionButton").addEventListener("click", () => {
+      const id = document.getElementById("addSessionInput").value;
+      addSession(id);
+      showActivePlayers();
+      showActiveItems();
+      showActiveSession();
+    });
 
-          const resultsElement = document.getElementById("activePlayerResults");
+    // Delete Session
+    document.getElementById("deleteSessionButton").addEventListener("click", () => {
+      deleteSession();
+      showActivePlayers();
+      showActiveItems();
+      showActiveSession();
+    });
+    // --------------------------------------
+
+    async function showActivePlayers() {
+      const players = await getAllActivePlayers();
+      console.log('Parsed players:', players);
+
+      const resultsElement = document.getElementById("activePlayerResults");
     
-          if (players && players.results) {
-            resultsElement.innerHTML = players.results.map(player => 
-            `<div>${player.name} as ${player.character_name} with ID ${player.id}</div>`
-          ).join("");
-          } else {
-            resultsElement.innerHTML = "<div>No players found</div>";
-          }
-        }
-        showActivePlayers();
+      if (players && players.results) {
+        resultsElement.innerHTML = players.results.map(player =>
+          `<div>${player.name} as ${player.character_name} with ID ${player.id}</div>`
+        ).join("");
+      } 
+      else {
+        resultsElement.innerHTML = "<div>No players found</div>";
+      }
+    }
+    showActivePlayers();
 
-        async function showActiveItems() {
-          const items = await getAllActiveItems();
-          console.log('Parsed items:', items);
+    async function showActiveItems() {
+      const items = await getAllActiveItems();
+      console.log('Parsed items:', items);
 
-          const resultsElement = document.getElementById("activeItemsResults");
+      const resultsElement = document.getElementById("activeItemsResults");
     
-          if (items && items.result) {
-            resultsElement.innerHTML = items.result.map(item => 
-            `<div>${item.player_id} has a ${item.item_name} with ID ${item.id}</div>`
-          ).join("");
-          } else {
-            resultsElement.innerHTML = "<div>No items found</div>";
-          }
+      if (items && items.result) {
+        resultsElement.innerHTML = items.result.map(item => 
+          `<div>${item.player_id} has a ${item.item_name} with ID ${item.id}</div>`
+        ).join("");
+      } 
+      else {
+        resultsElement.innerHTML = "<div>No items found</div>";
         }
-        showActiveItems();
+      }
+      showActiveItems();
 
-        async function showActiveSession() {
-          const session = await getActiveSession();
-          console.log('Parse session:', session);
+    async function showActiveSession() {
+      const session = await getActiveSession();
+      console.log('Parse session:', session);
 
-          const resultsElement = document.getElementById("activeSessionResults");
+      const resultsElement = document.getElementById("activeSessionResults");
     
-          if (session && session.result.length != 0) {
-            resultsElement.innerHTML = `<div>Active Session ID of '${session.result[0].session_id}'</div>`
-          } else {
-            resultsElement.innerHTML = "<div>No Active Session found</div>";
-          }
-        }
-        showActiveSession();
+      if (session && session.result.length != 0) {
+        resultsElement.innerHTML = `<div>Active Session ID of '${session.result[0].session_id}'</div>`
+      } 
+      else {
+        resultsElement.innerHTML = "<div>No Active Session found</div>";
+      }
+    }
+    showActiveSession();
     </script>
 
     <div class="apiContainer">
@@ -124,11 +141,15 @@
             <h2>Add Player</h2>
             <div style="margin-top: 10px;">
                 <label>Name:</label>
-                <input type="text" id="nameInput" placeholder="Enter name">
+                <input type="text" id="addPlayerNameInput" placeholder="Enter Name">
             </div>
             <div style="margin-top: 5px;">
                 <label>Character:</label>
-                <input type="text" id="charInput" placeholder="Enter character">
+                <input type="text" id="addPlayerCharacterInput" placeholder="Enter Character">
+            </div>
+            <div style="margin-top: 5px;">
+                <label>Session ID:</label>
+                <input type="text" id="addPlayerSessionInput" placeholder="Enter Session ID">
             </div>
             <button id="addPlayerButton" style="margin-top: 10px; margin-bottom: 10px;">Add Player</button>
 
@@ -136,20 +157,22 @@
                 <h2>Active Players</h2>
                 <p id="activePlayerResults"></p>
             </div>
-        
-        
         </div>
 
         <!--Add Item-->
         <div class="apiCard">
             <h2>Add Item</h2>
             <div style="margin-top: 10px;">
-                <label for="nameInput">Player ID:</label>
-                <input type="text" id="idInput" placeholder="Enter ID">
+                <label>Player ID:</label>
+                <input type="text" id="addItemIdInput" placeholder="Enter ID">
             </div>
             <div style="margin-top: 5px;">
                 <label>Item Name:</label>
-                <input type="text" id="itemNameInput" placeholder="Enter Item Name">
+                <input type="text" id="addItemNameInput" placeholder="Enter Item Name">
+            </div>
+            <div style="margin-top: 5px;">
+                <label>Session ID:</label>
+                <input type="text" id="addItemSessionInput" placeholder="Enter Session ID">
             </div>
             <button id="addItemButton" style="margin-top: 10px; margin-bottom: 10px;">Add Item</button>
 
@@ -157,6 +180,34 @@
                 <h2>Active Items</h2>
                 <p id="activeItemsResults"></p>
             </div>
+        </div>
+
+        <!--Update Coins-->
+        <div class="apiCard">
+            <h2>Update Coins</h2>
+            <div style="margin-top: 10px;">
+                <label>Player ID:</label>
+                <input type="text" id="updateCoinsIdInput" placeholder="Enter ID">
+            </div>
+            <div style="margin-top: 5px;">
+                <label>Number:</label>
+                <input type="text" id="updateCoinsNumberInput" placeholder="Enter Number of Coins">
+            </div>
+            <button id="updateCoinsButton" style="margin-top: 10px; margin-bottom: 10px;">Update Coins</button>
+        </div>
+
+        <!--Update Stars-->
+        <div class="apiCard">
+            <h2>Update Stars</h2>
+            <div style="margin-top: 10px;">
+                <label>Player ID:</label>
+                <input type="text" id="updateStarsIdInput" placeholder="Enter ID">
+            </div>
+            <div style="margin-top: 5px;">
+                <label>Number:</label>
+                <input type="text" id="updateStarsNumberInput" placeholder="Enter Number of Stars">
+            </div>
+            <button id="updateStarsButton" style="margin-top: 10px; margin-bottom: 10px;">Update Stars</button>
         </div>
 
         <!--Delete Player-->

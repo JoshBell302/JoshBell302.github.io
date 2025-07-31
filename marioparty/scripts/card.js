@@ -91,7 +91,7 @@ export async function createDashboardCards (grid) {
 
         const coinDiv = document.createElement("div");
         const coinImage = new Image(50,50);
-        coinImage.src = "/marioparty/images/items/star.png";
+        coinImage.src = "/marioparty/images/items/coin.png";
         coinImage.alt = "Coins:";
         coinImage.style = "vertical-align:middle;";
         const coinNumber = document.createElement("strong");
@@ -102,7 +102,7 @@ export async function createDashboardCards (grid) {
         
         const starDiv = document.createElement("div");
         const starImage = new Image(50,50);
-        starImage.src = "/marioparty/images/items/coin.png";
+        starImage.src = "/marioparty/images/items/star.png";
         starImage.alt = "Stars:";
         starImage.style = "vertical-align:middle;";
         const starNumber = document.createElement("strong");
@@ -111,8 +111,8 @@ export async function createDashboardCards (grid) {
         starDiv.appendChild(starImage);
         starDiv.appendChild(starNumber);
 
-        dataDiv.appendChild(starDiv);
         dataDiv.appendChild(coinDiv);
+        dataDiv.appendChild(starDiv);
         div.appendChild(dataDiv);
 
         // Create Item information
