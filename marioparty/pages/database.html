@@ -83,6 +83,22 @@
       showActiveItems();
       showActiveSession();
     });
+
+    // Hidden Block
+    document.getElementById("hiddenBlockButton").addEventListener("click", () => {
+      const spaces = document.getElementById("hiddenBlockInput").value;
+      const resultsElement = document.getElementById("hiddenBlockResults");
+      const randomSpaceNumber = Math.floor(Math.random() * spaces)+1;
+      resultsElement.innerHTML = `<div>Hidden Block is on Space number ${randomSpaceNumber}</div>`
+    });
+
+    // Star Space
+    document.getElementById("starSpaceButton").addEventListener("click", () => {
+      const spaces = document.getElementById("starSpaceInput").value;
+      const resultsElement = document.getElementById("starSpaceResults");
+      const randomSpaceNumber = Math.floor(Math.random() * spaces)+1;
+      resultsElement.innerHTML = `<div>Star Space is over Blue Space number ${randomSpaceNumber}</div>`
+    });
     // --------------------------------------
 
     async function showActivePlayers() {
@@ -251,6 +267,39 @@
             <button id="deleteSessionButton" style="margin-top: 10px; margin-bottom: 10px;">Delete Session</button>
         </div>
     </div>
+
+    <!-- For In-Game Secrets -->
+   <div class="apiContainer" style="margin-top: 20px">
+    <!--Hidden Block-->
+    <div class="apiCard">
+      <h2>Hidden Block</h2>
+      <div style="margin-top: 10px;">
+        <label>Number of Total Spaces:</label>
+        <input type="text" id="hiddenBlockInput" placeholder="Number of Total Spaces">
+      </div>
+        <button id="hiddenBlockButton" style="margin-top: 10px; margin-bottom: 10px;">Find Hidden Block Space</button>
+            
+      <div>
+        <h2>Current Location of Hidden Block</h2>
+        <p id="hiddenBlockResults"></p>
+      </div>
+    </div>
+
+    <!--Star Space-->
+    <div class="apiCard">
+      <h2>Star Space</h2>
+      <div style="margin-top: 10px;">
+        <label>Number of Blue Spaces:</label>
+        <input type="text" id="starSpaceInput" placeholder="Number of Blue Spaces">
+      </div>
+        <button id="starSpaceButton" style="margin-top: 10px; margin-bottom: 10px;">Find Star Space</button>
+            
+      <div>
+        <h2>Location of Star Space</h2>
+        <p id="starSpaceResults"></p>
+      </div>
+    </div>
+   </div>
 
 </body>
 

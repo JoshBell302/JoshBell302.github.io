@@ -1,4 +1,7 @@
 # Changelog
+## Version 3.2.5 (July 31st 2025)
+* Added Hidden Block and Star Space randomizers to Database
+
 ## Version 3.2.4 (July 31st 2025)
 * Updated Header for game day
 
