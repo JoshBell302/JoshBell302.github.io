@@ -15,7 +15,7 @@
   <h1>Database</h1>
 
   <script type="module">
-    import { addPlayer, deletePlayer, updateCoins, updateStars, 
+    import { COIN_VALUES, addPlayer, deletePlayer, updateCoins, updateStars, 
       addItem, deleteItem, addSession, deleteSession, 
       getAllActivePlayers, getAllActiveItems, getActiveSession
     } from "/marioparty/scripts/api.js";
@@ -99,6 +99,103 @@
       const randomSpaceNumber = Math.floor(Math.random() * spaces)+1;
       resultsElement.innerHTML = `<div>Star Space is over Blue Space number ${randomSpaceNumber}</div>`
     });
+
+
+    // Coin Buttons -----------
+    // Blue Space
+    document.getElementById("blueSpace").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.blueSpace);
+    });
+    // Red Space
+    document.getElementById("redSpace").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.redSpace);
+    });
+    // Solo Minigame 1st Place
+    document.getElementById("soloMinigame1").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.soloMinigame1);
+    });
+    // Solo Minigame 2nd Place
+    document.getElementById("soloMinigame2").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.soloMinigame2);
+    });
+    // Solo Minigame 3rd to 7th Place
+    document.getElementById("soloMinigame3to7").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.soloMinigame3to7);
+    });
+    // Solo Minigame 8th Place +
+    document.getElementById("soloMinigame8").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.soloMinigame8);
+    });
+    // Team Minigame Win
+    document.getElementById("teamMinigameWin").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.teamMinigameWin);
+    });
+    // Team Minigame Loss
+    document.getElementById("teamMinigameLoss").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.teamMinigameLoss);
+    });
+    // Buy Star
+    document.getElementById("buyStar").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.buyStar);
+    });
+    // Buy Golden Pipe from the Shop
+    document.getElementById("buyGoldenPipe").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.buyGoldenPipe);
+    });
+    // Buy Double Dice from the Shop
+    document.getElementById("buyDoubleDice").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.buyDoubleDice);
+    });
+    // Buy Mirror from the Shop
+    document.getElementById("buyMirror").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.buyMirror);
+    });
+    // Get Coins from Boo
+    document.getElementById("booCoinGain").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.booCoinGain);
+    });
+    // Lose Coins from Boo
+    document.getElementById("booCoinLoss").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.booCoinLoss);
+    });
+    // Buy a Star from Boo
+    document.getElementById("booStarBuy").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.booStarBuy);
+    });
+    // Get Coins from the Hidden Block
+    document.getElementById("hiddenBlockCoins").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateCoinsIdInput").value;
+      updateCoinButton(id, COIN_VALUES.hiddenBlockCoins);
+    });
+
+    // Star Buttons -----------
+    // Gain a Star
+    document.getElementById("gainStar").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateStarsIdInput").value;
+      updateStarButton(id, 1);
+    });
+    // Lose a Star
+    document.getElementById("loseStar").addEventListener("click", () => {
+      const id = document.getElementById("listOfUpdateStarsIdInput").value;
+      updateStarButton(id, -1);
+    });
+
+
     // --------------------------------------
 
     async function showActivePlayers() {
@@ -149,6 +246,40 @@
       }
     }
     showActiveSession();
+
+    async function updateCoinButton(playerId, spaceCoins) {
+      // Find player that matches ID given
+      const activePlayers = await getAllActivePlayers();
+      console.log('Parsed active players:', activePlayers);
+      let matches = false;
+      for (let i = 0; i < activePlayers.results.length; i++) {
+        if (activePlayers.results[i].id == playerId) {
+          updateCoins(playerId, activePlayers.results[i].coins + spaceCoins);
+          console.log(`Player ID ${playerId} now has ${activePlayers.results[i].coins + spaceCoins} coins`);
+          return;
+        }
+      }
+      if (!matches) {
+        console.log(`No matches found with ID ${playerId}`);
+      }
+    }
+
+    async function updateStarButton(playerId, starAdjustment) {
+      // Find player that matches ID given
+      const activePlayers = await getAllActivePlayers();
+      console.log('Parsed active players:', activePlayers);
+      let matches = false;
+      for (let i = 0; i < activePlayers.results.length; i++) {
+        if (activePlayers.results[i].id == playerId) {
+          updateStars(playerId, activePlayers.results[i].stars + starAdjustment);
+          console.log(`Player ID ${playerId} now has ${activePlayers.results[i].stars + starAdjustment} star`);
+          return;
+        }
+      }
+      if (!matches) {
+        console.log(`No matches found with ID ${playerId}`);
+      }
+    }
     </script>
 
     <div class="apiContainer">
@@ -268,7 +399,59 @@
         </div>
     </div>
 
-    <!-- For In-Game Secrets -->
+    <!-- Easy Coin and Star Updates -->
+   <div class="apiContainer" style="margin-top: 20px">
+    <!--Coin Updates-->
+    <div class="apiCard">
+      <h2>List of Coin Updates</h2>
+      <div style="margin-top: 10px;">
+        <label>Player ID:</label>
+        <input type="text" id="listOfUpdateCoinsIdInput" placeholder="Player ID">
+      </div>
+        <button id="blueSpace" style="margin-top: 10px; margin-bottom: 10px;">Blue Space</button>
+        <button id="redSpace" style="margin-top: 10px; margin-bottom: 10px;">Red Space</button>
+        <button id="soloMinigame1" style="margin-top: 10px; margin-bottom: 10px;">Solo Minigame 1st</button>
+        <button id="soloMinigame2" style="margin-top: 10px; margin-bottom: 10px;">Solo Minigame 2nd</button>
+        <button id="soloMinigame3to7" style="margin-top: 10px; margin-bottom: 10px;">Solo Minigame 3rd - 7th</button>
+        <button id="soloMinigame8" style="margin-top: 10px; margin-bottom: 10px;">Solo Minigame 8th+</button>
+        <button id="teamMinigameWin" style="margin-top: 10px; margin-bottom: 10px;">Team Minigame Win</button>
+        <button id="teamMinigameLoss" style="margin-top: 10px; margin-bottom: 10px;">Team Minigame Loss</button>
+        <button id="buyStar" style="margin-top: 10px; margin-bottom: 10px;">Buy Star</button>
+        <button id="buyGoldenPipe" style="margin-top: 10px; margin-bottom: 10px;">Buy Golden Pipe</button>
+        <button id="buyDoubleDice" style="margin-top: 10px; margin-bottom: 10px;">Buy Double Dice</button>
+        <button id="buyMirror" style="margin-top: 10px; margin-bottom: 10px;">Buy Mirror</button>
+        <button id="booCoinGain" style="margin-top: 10px; margin-bottom: 10px;">Boo Coin Gain</button>
+        <button id="booCoinLoss" style="margin-top: 10px; margin-bottom: 10px;">Boo Coin Loss</button>
+        <button id="booStarBuy" style="margin-top: 10px; margin-bottom: 10px;">Boo Star Buy</button>
+        <button id="hiddenBlockCoins" style="margin-top: 10px; margin-bottom: 10px;">Hidden Block</button>
+    </div>
+    <!--Star Updates-->
+    <div class="apiCard">
+      <h2>List of Star Updates</h2>
+      <div style="margin-top: 10px;">
+        <label>Player ID:</label>
+        <input type="text" id="listOfUpdateStarsIdInput" placeholder="Player ID">
+      </div>
+        <button id="gainStar" style="margin-top: 10px; margin-bottom: 10px;">Gain a Star</button>
+        <button id="loseStar" style="margin-top: 10px; margin-bottom: 10px;">Lose a Star</button>
+    </div>
+    <!--Red Space-->
+    <!--Hidden Block-->
+    <!--Pay for Star-->
+    <!--Pay for Golden Pipe-->
+    <!--Pay for Double Dice-->
+    <!--Pay for Mirror-->
+    <!--Solo Minigame 1st-->
+    <!--Solo Minigame 2nd-->
+    <!--Solo Minigame 3rd to 7th-->
+    <!--Solo Minigame 8th-->
+    <!--Team Minigame Win-->
+    <!--Team Minigame Loss-->
+    <!--Boo Gain-->
+    <!--Boo Loss-->
+
+
+  <!-- For In-Game Secrets -->
    <div class="apiContainer" style="margin-top: 20px">
     <!--Hidden Block-->
     <div class="apiCard">

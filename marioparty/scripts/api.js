@@ -1,5 +1,24 @@
 const API_URL = "https://marioparty-backend.onrender.com";
 
+export const COIN_VALUES = {
+    blueSpace: 5,
+    redSpace: -3,
+    soloMinigame1: 10,
+    soloMinigame2: 8,
+    soloMinigame3to7: 5,
+    soloMinigame8: 3,
+    teamMinigameWin: 8,
+    teamMinigameLoss: 3,
+    buyStar: -20,
+    buyGoldenPipe: -15,
+    buyDoubleDice: -10,
+    buyMirror: -5,
+    booCoinGain: 15,
+    booCoinLoss: -15,
+    booStarBuy: -50,
+    hiddenBlockCoins: 20
+}
+
 // Player Routes ----------------------------------------------------------------------------------
 export function addPlayer(session_id, name, character) {
     // Report to console the call

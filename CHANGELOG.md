@@ -1,4 +1,7 @@
 # Changelog
+## Version 3.2.6 (August 2nd 2025)
+* Added Easy Coind and Star Adjustment buttons for expected in game changes
+
 ## Version 3.2.5 (July 31st 2025)
 * Added Hidden Block and Star Space randomizers to Database
 
